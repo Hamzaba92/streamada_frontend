@@ -1,106 +1,21 @@
-
-body {
+.navbar svg {
+    max-width: 170px; 
+    height: 50px;
+  }
+  
+  .navbar {
+    background-color: black;
+    opacity: 0.88; 
     margin: 0;
-    background: black; 
-    overflow: hidden;
-  }
-  
-  .streamada-animation {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: black;
-    animation: fadeOut 2.5s forwards ease-in-out 2.6s; 
-  }
-  
-  .light-bar {
-    position: absolute;
-    width: 200vw; 
-    height: 16.66vh; 
-    background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.8), transparent);
-    opacity: 0.6;
-    animation: slideHorizontal 3.8s forwards ease-in-out;
-    top: 0;
-    left: 0;
-  }
-  
-  
-  .bar1 {
-    top: 0%;
-  }
-  
-  .bar2 {
-    top: 16.66%;
-  }
-  
-
-  .bar3 {
-    top: 33.32%;
-  }
-  
-  .bar4 {
-    top: 49.98%;
-  }
-  
-  
-  .bar5 {
-    top: 66.64%;
-  }
-  
-  .bar6 {
-    top: 83.3%;
-  }
-  
-  .logo-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1; 
-    opacity: 0;
-    animation: logoAppear 1.8s forwards ease-in-out 0.9s; 
-  }
-  
-  @keyframes slideHorizontal {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0.6;
-    }
-    50% {
-      transform: translateX(0);
-      opacity: 0.9;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-  }
-  
-  @keyframes logoAppear {
-    0% {
-      opacity: 0;
-      transform: scale(1);
-    }
-    100% {
-      opacity: 1.2;
-      transform: scale(1.1); 
-    }
-  }
-  
-  @keyframes fadeOut {
-    0% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-50px);
-    }
+    padding: 0;
   }
 
   main{
-    background: black;
-  }
+    background-color: #141414;
+    height: calc(100vh - 60px);
+    background-image: url(../../assets/landingpage/start_screen.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+  
