@@ -1,0 +1,128 @@
+@import '../../colors.scss';
+
+.navbar svg {
+  max-width: 170px;
+  height: 50px;
+}
+
+.navbar {
+  background-color: rgba($color: #000000, $alpha: 0.88);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  button {
+    margin-right: 32px;
+    color: white;
+    border-color: $net_red;
+    flex-shrink: 0;
+
+    &:hover {
+      background-color: $net_red;
+    }
+  }
+}
+
+main {
+  position: relative;
+  height: calc(100vh - 60px);
+  background-image: url(../../assets/landingpage/start_screen.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  overflow: hidden;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .over-middle-content-container {
+    position: relative;
+    z-index: 2;
+    min-height: 244px;
+    width: 650px;
+    text-align: center;
+    span {
+      font-size: 22px;
+    }
+
+    p {
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    .input-div {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+
+      button {
+        color: white;
+        border-color: $net_red;
+
+        &:hover {
+          background-color: $net_red;
+        }
+      }
+
+      input {
+        background-color: transparent;
+        border: 1px solid $net_red;
+        border-radius: 6px;
+        outline: none;
+        color: white;
+        padding: 8px;
+
+        &:focus {
+          outline: none;
+          border-color: $net_red;
+          box-shadow: none;
+        }
+        &::placeholder{
+          color: white;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .imprint-privacypolicy{
+   z-index: 2;
+   display: flex;
+   gap: 78px;
+   padding-top: 48px;
+
+   .privacy-policy{
+    text-decoration: underline;
+    &:hover{
+      cursor: pointer;
+      color: $net_red;
+    }
+   }
+
+   .imprint{
+    text-decoration: underline;
+    
+    &:hover{
+      cursor: pointer;
+      color: $net_red;
+    }
+   }
+
+  }
+
+}

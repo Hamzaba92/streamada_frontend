@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LandingpageLoginComponent } from './landingpage-login/landingpage-login.component';
 import { StartAnimationComponent } from './start-animation/start-animation.component';
 import { StartAnimationService } from './services/start-animation.service';
 import { CommonModule } from '@angular/common';
+import { LandingpageComponent } from './landingpage/landingpage.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, StartAnimationComponent, LandingpageLoginComponent, CommonModule],
+  imports: [RouterOutlet, StartAnimationComponent, LandingpageComponent, CommonModule, LoginComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

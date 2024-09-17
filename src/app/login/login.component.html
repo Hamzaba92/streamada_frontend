@@ -1,0 +1,55 @@
+<nav class="navbar">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand">
+            <svg viewBox="0 0 1000 200" width="190px" height="50px">
+                <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
+                <text fill="#E50914" font-size="120" font-weight="bold" letter-spacing="25">
+                    <textPath href="#curved-path" startOffset="0%">
+                        STREAMADA
+                    </textPath>
+                </text>
+            </svg>
+        </a>
+    </div>
+    <button type="button" class="btn btn-outline-danger" (click)="backToLandingpage()">Back</button>
+</nav>
+
+<main class="login-overcontainer">
+
+    <div class="email-password-conti">
+        <h1>Log in</h1>
+        <form class="example-form">
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                    placeholder="youremail@example.com">
+                @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                <mat-error>Please enter a valid email</mat-error>
+                }
+                @if (emailFormControl.hasError('required')) {
+                <mat-error>Email is <strong>required</strong></mat-error>
+                }
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput [type]="hide ? 'password' : 'text'" [formControl]="passwordFormControl" placeholder="Password">
+                <mat-icon matSuffix (click)="togglePasswordVisibility()" [attr.aria-label]="'Toggle password visibility'" 
+                          [attr.aria-pressed]="hide" style="cursor: pointer;">
+                  {{ hide ? 'visibility_off' : 'visibility' }}
+                </mat-icon>
+                @if (passwordFormControl.hasError('required')) {
+                  <mat-error>Password is <strong>required</strong></mat-error>
+                }
+              </mat-form-field>
+
+              <button type="button" class="btn btn-outline-danger">Log In</button>
+              <span>Forget password?</span>
+              <div class="new-to-streamada">
+                <div>New to Streamada?</div>
+                <p>Sign-Up now.</p>
+              </div>
+        </form>
+
+    </div>
+</main>
