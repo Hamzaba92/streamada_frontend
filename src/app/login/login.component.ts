@@ -46,4 +46,8 @@ export class LoginComponent {
   backToLandingpage(){
    this.router.navigate(['landingpage']); 
   }
+
+  openSignUpComp(){
+    this.router.navigate(['/register']);
+  }
 }

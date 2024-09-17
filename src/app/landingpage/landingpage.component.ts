@@ -13,8 +13,11 @@ export class LandingpageComponent {
   constructor(private router: Router){}
 
   openLoginComp(){
-    this.router.navigate(['/app-login']);
+    this.router.navigate(['/login']);
   }
 
+  openSignUpComp(){
+    this.router.navigate(['/register']);
+  }
 
 }
