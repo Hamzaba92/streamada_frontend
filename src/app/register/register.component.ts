@@ -12,6 +12,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -29,6 +30,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+
+  constructor(private router: Router){}
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [
@@ -59,6 +62,10 @@ export class RegisterComponent {
     } else if (type === 'confirmPassword') {
       this.hideConfirmPassword = !this.hideConfirmPassword;
     }
+  }
+
+  backtoLandingpage(){
+    this.router.navigate(['/landingpage']);
   }
 
 }
