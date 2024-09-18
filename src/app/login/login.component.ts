@@ -50,4 +50,8 @@ export class LoginComponent {
   openSignUpComp(){
     this.router.navigate(['/register']);
   }
+
+  openForgetPasswordComp(){
+    this.router.navigate(['forget-password']);
+  }
 }
