@@ -17,4 +17,81 @@
 <main class="overcontainer-register">
 
 
+    <form class="example-form">
+
+        <h1>Sign Up</h1>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput placeholder="First Name" required [(ngModel)]="firstName" name="firstName"
+                #firstNameInput="ngModel">
+            <mat-error *ngIf="firstNameInput.invalid && firstNameInput.touched">
+                First Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" required [(ngModel)]="lastName" name="lastName"
+                #lastNameInput="ngModel">
+            <mat-error *ngIf="lastNameInput.invalid && lastNameInput.touched">
+                Last Name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                placeholder="youremail@example.com">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hidePassword ? 'password' : 'text'" [formControl]="passwordFormControl" placeholder="Password">
+            <mat-icon matSuffix (click)="togglePasswordVisibility('password')"
+              [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hidePassword" style="cursor: pointer;">
+              {{ hidePassword ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+            <mat-error class="change-font-size"
+            *ngIf="passwordFormControl.hasError('required') || passwordFormControl.hasError('minlength') || passwordFormControl.hasError('pattern')">
+            <ng-container *ngIf="passwordFormControl.hasError('required')">
+              Password is <strong>required</strong>.
+            </ng-container>
+            
+            <ng-container *ngIf="(passwordFormControl.hasError('minlength') || passwordFormControl.hasError('pattern')) && !passwordFormControl.hasError('required')">
+              Min. 8 characters, must include 1 letter, 1 number, and 1 special character.
+            </ng-container>
+          
+          </mat-error>
+          </mat-form-field>
+        
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirm Password</mat-label>
+            <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" [formControl]="confirmPasswordFormControl" placeholder="Confirm Password">
+            <mat-icon matSuffix (click)="togglePasswordVisibility('confirmPassword')"
+              [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hideConfirmPassword" style="cursor: pointer;">
+              {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
+            </mat-icon>
+            <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
+              Confirm Password is <strong>required</strong>
+            </mat-error>
+            <mat-hint *ngIf="!passwordsMatch && confirmPasswordFormControl.touched">
+              No match
+            </mat-hint>
+          </mat-form-field>
+
+        <button type="button" class="btn btn-outline-danger">Sign up</button>
+
+    </form>
+
+
+
 </main>
