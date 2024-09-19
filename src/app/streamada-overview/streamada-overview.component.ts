@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-streamada-overview',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class StreamadaOverviewComponent {
 
+  constructor(private router: Router){}
+
+  logoutUser(){
+    this.router.navigate(['landingpage']);
+  }
 }

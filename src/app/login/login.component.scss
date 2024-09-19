@@ -29,7 +29,7 @@
 
 .login-overcontainer {
   position: relative;
-  height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px);
   background-image: url(../../assets/login/login_bg.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
