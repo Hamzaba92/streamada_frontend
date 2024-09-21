@@ -59,6 +59,11 @@
   }
 }
 
+.new-on-streamada{
+  display: flex;
+  
+}
+
 header.video-playing-loop-atf {
   position: relative;
   width: 100%;
@@ -91,18 +96,92 @@ header.video-playing-loop-atf {
 }
 
 .video-item {
+  position: relative;
   cursor: pointer;
   color: white;
   text-align: center;
+  transition: transform 0.3s ease;
 
-  &:hover {
-    scale: (1.09);
+  img {
+    width: 200px;
+    border-radius: 10px;
   }
 }
 
-.video-item img {
-  width: 150px;
-  height: auto;
+.hover-dialog {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px;
   border-radius: 10px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  pointer-events: none;
 
+  .hover-preview {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  h3 {
+    color: white;
+    margin-top: 10px;
+  }
+
+  .play-button {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+
+    button:first-child {
+      background-color: $net_red;
+      color: white;
+      border: none;
+      border-radius: 35%;
+      width: 50px;
+      height: 50px;
+      font-size: 38px;
+      padding: 5px 5px 10px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+
+      &:hover {
+        transform: scale(1.1);
+        background-color: lighten($net_red, 10%);
+      }
+    }
+
+    button:last-child {
+      background-color: transparent;
+      color: white;
+      border-radius: 5px;
+      padding: 10px;
+      transition: background-color 0.2s ease;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+}
+
+.video-item:hover {
+  .hover-dialog {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: none;
+    cursor: none;
+  }
+}
+
+.video-item:hover {
+  .play-button {
+    pointer-events: auto;
+  }
 }

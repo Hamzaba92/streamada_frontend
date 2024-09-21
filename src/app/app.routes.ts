@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { StreamadaOverviewComponent } from './streamada-overview/streamada-overview.component';
+import { MediaplayerComponent } from './mediaplayer/mediaplayer.component';
 
 
 export const routes: Routes = [
@@ -16,4 +17,5 @@ export const routes: Routes = [
     { path: 'forget-password', component: ForgetPasswordComponent},
     { path: 'reset-password', component: ResetPasswordComponent},
     { path: 'streamada-overview', component: StreamadaOverviewComponent},
+    { path: 'mediaplayer', component: MediaplayerComponent}
 ];

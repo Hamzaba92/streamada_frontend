@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './streamada-overview.component.html',
   styleUrls: ['./streamada-overview.component.scss']
 })
-export class StreamadaOverviewComponent implements AfterViewInit {
+export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('backgroundVideo') backgroundVideoRef: ElementRef<HTMLVideoElement> | undefined;
 
@@ -18,29 +18,50 @@ export class StreamadaOverviewComponent implements AfterViewInit {
   constructor(private router: Router) { }
 
   ngAfterViewInit() {
-    if (this.backgroundVideoRef) {
+    if (this.backgroundVideoRef?.nativeElement) {
       const backgroundVideo = this.backgroundVideoRef.nativeElement;
       backgroundVideo.addEventListener('error', this.handleVideoError);
     }
   }
 
-  playVideo(videoSrc: string) {
+  ngOnDestroy() {
+    if (this.backgroundVideoRef?.nativeElement) {
+      const backgroundVideo = this.backgroundVideoRef.nativeElement;
+      backgroundVideo.removeEventListener('error', this.handleVideoError);
+    }
+  }
+
+  playPreview(event: Event, videoSrc: string): void {
+    event.stopPropagation(); 
+  
+    this.currentVideoSrc = videoSrc;
+  }
+
+  playVideo(event: Event, videoSrc: string): void {
+    if (!this.backgroundVideoRef?.nativeElement) {
+      console.error('Background video element not found');
+      return;
+    }
+    
+    const backgroundVideo = this.backgroundVideoRef.nativeElement;
+    
     try {
       this.currentVideoSrc = videoSrc;
-      
-      if (this.backgroundVideoRef) {
-        const backgroundVideo = this.backgroundVideoRef.nativeElement;
-        backgroundVideo.src = videoSrc;
-        backgroundVideo.load();
-
-        backgroundVideo.addEventListener('canplay', () => {
-          backgroundVideo.play().catch(error => {
-            console.error('Error playing video:', error);
-          });
-        }, { once: true }); 
-      }
+      backgroundVideo.src = videoSrc;
+      backgroundVideo.load();
+      backgroundVideo.addEventListener('canplay', this.handleCanPlay, { once: true });
     } catch (error) {
       console.error('Error loading video:', error);
+    }
+  }
+
+  handleCanPlay = (event: Event) => {
+    const video = event.target as HTMLVideoElement;
+
+    if (video) {
+      video.play().catch(error => {
+        console.error('Error playing video:', error);
+      });
     }
   }
 
@@ -48,7 +69,6 @@ export class StreamadaOverviewComponent implements AfterViewInit {
     console.error('Video failed to load:', event);
   }
 
-  
   videos = [
     {
       title: 'Wüsten Video',
@@ -65,4 +85,9 @@ export class StreamadaOverviewComponent implements AfterViewInit {
   logoutUser() {
     this.router.navigate(['landingpage']);
   }
+   
+  openMediaPlayer(){
+    this.router.navigate(['mediaplayer']);
+  }
+
 }
