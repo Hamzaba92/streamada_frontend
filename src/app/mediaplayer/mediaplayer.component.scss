@@ -1,0 +1,73 @@
+@import './../../colors.scss';
+
+
+.navbar {
+  background-color: rgba($color: #000000, $alpha: 0.88);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  z-index: 3;
+  position: relative;
+  height: 60px;
+
+  button {
+    margin-right: 32px;
+    color: white;
+    border-color: $net_red;
+    flex-shrink: 0;
+    align-items: center;
+    display: flex;
+    &:hover {
+      background-color: $net_red;
+    }
+  }
+
+  svg {
+    max-width: 170px;
+    height: 50px;
+  }
+}
+
+.overcontainer-mediaplayer{
+    position: relative;
+    min-height: calc(100vh - 60px);
+    background-color: $net_backgr;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    overflow: hidden;
+    z-index: 2;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .media-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 4;
+        height: 500px;
+        width: 600px;
+        flex-direction: column;
+        column-gap: 20px;
+      }
+
+  }
+
+
