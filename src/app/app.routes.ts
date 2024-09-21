@@ -10,7 +10,7 @@ import { MediaplayerComponent } from './mediaplayer/mediaplayer.component';
 
 export const routes: Routes = [
 
-    { path: '', redirectTo: '/landingpage', pathMatch: 'full' },
+    { path: '', redirectTo: 'landingpage', pathMatch: 'full' },
     { path: 'landingpage', component: LandingpageComponent },
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},

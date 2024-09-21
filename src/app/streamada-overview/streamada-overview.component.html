@@ -26,21 +26,36 @@
 
         <section class="new-on-streamada">
             <h2>New on Stremada</h2>
-            <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video.src)">
-                <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
-                <div class="hover-dialog">
-                    
-                    <img [src]="video.thumbnail" [alt]="video.title" class="hover-preview">
-                    <h4>{{ video.title }}</h4>
-                    <div class="play-button">
-                        <button (click)="openMediaPlayer()">&blacktriangleright;</button>
-                        <button (click)="playPreview($event, video.src)" type="button" class="btn btn-outline-danger">Preview</button>
-                    </div>
+            <div class="video-container">
+                <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video.src)">
+                    <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
+                    <div class="hover-dialog">
 
+                        <img [src]="video.thumbnail" [alt]="video.title" class="hover-preview">
+                        <h4>{{ video.title }}</h4>
+                        <div class="play-button">
+                            <button (click)="openMediaPlayer()">&blacktriangleright;</button>
+                            <button (click)="playPreview($event, video.src)" type="button"
+                                class="btn btn-outline-danger">Preview</button>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </section>
     </header>
+
+    <section *ngIf="selectedVideo" class="video-info">
+        <h1>Turtle</h1>
+        <p>The video "Turtel" follows the journey of a sea turtle across the ocean, exploring its natural habitat.
+            Stunning underwater scenes capture the beauty of marine life, from coral reefs to vast open waters. The
+            turtle's daily struggles for survival are shown, including its interactions with predators and the hunt for
+            food. Along the way, viewers learn about the challenges marine animals face due to environmental changes.
+            The documentary highlights the importance of ocean conservation and protecting endangered species like sea
+            turtles. It's both an educational and visually captivating experience for all ages.</p>
+        <p><strong>Genre:</strong> Documentary</p>
+        <button (click)="openMediaPlayer()" class="btn btn-primary">Play</button>
+    </section>
 
 
 

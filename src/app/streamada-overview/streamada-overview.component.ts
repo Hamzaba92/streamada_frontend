@@ -15,6 +15,8 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   currentVideoSrc: string = 'assets/videos/test_video.mp4';
 
+  selectedVideo: any = null;
+
   constructor(private router: Router) { }
 
   ngAfterViewInit() {
@@ -33,9 +35,10 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   playPreview(event: Event, videoSrc: string): void {
     event.stopPropagation(); 
-  
+    this.selectedVideo = videoSrc; 
     this.currentVideoSrc = videoSrc;
   }
+  
 
   playVideo(event: Event, videoSrc: string): void {
     if (!this.backgroundVideoRef?.nativeElement) {
@@ -73,12 +76,16 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
     {
       title: 'Wüsten Video',
       src: 'assets/videos/test_video.mp4',
-      thumbnail: 'assets/videos/test_video_thumbnail.png'
+      thumbnail: 'assets/videos/test_video_thumbnail.png',
+      description: 'Ein aufregendes Abenteuer durch die Wüste.',
+      genre: 'Abenteuer'
     },
     {
       title: 'Turtel',
       src: 'assets/videos/test2.mp4',
-      thumbnail: 'assets/videos/thumbnail.jpg'
+      thumbnail: 'assets/videos/thumbnail.jpg',
+      description: 'Eine Reise mit einer Schildkröte.',
+      genre: 'Dokumentation'
     }
   ];
 
