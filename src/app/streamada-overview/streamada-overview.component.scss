@@ -1,9 +1,5 @@
 @import './../../colors.scss';
 
-.navbar svg {
-  max-width: 170px;
-  height: 50px;
-}
 
 .navbar {
   background-color: rgba($color: #000000, $alpha: 0.88);
@@ -13,6 +9,9 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
+  z-index: 3;
+  position: relative;
+  height: 60px;
 
   button {
     margin-right: 32px;
@@ -21,14 +20,20 @@
     flex-shrink: 0;
     align-items: center;
     display: flex;
+
     &:hover {
       background-color: $net_red;
     }
   }
+
+  svg {
+    max-width: 170px;
+    height: 50px;
+  }
 }
 
-.streamada-overview-overcontainer{
-    position: relative;
+.streamada-overview-overcontainer {
+  position: relative;
   min-height: calc(100vh - 60px);
   background-color: $net_backgr;
   background-repeat: no-repeat;
@@ -40,6 +45,7 @@
   flex-direction: column;
   color: white;
   overflow: hidden;
+  z-index: 2;
 
   &::before {
     content: '';
@@ -51,4 +57,52 @@
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 1;
   }
+}
+
+header.video-playing-loop-atf {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow: hidden;
+  top: 0;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.new-on-streamada {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: calc(20vh);
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.video-item {
+  cursor: pointer;
+  color: white;
+  text-align: center;
+
+  &:hover {
+    scale: (1.09);
+  }
+}
+
+.video-item img {
+  width: 150px;
+  height: auto;
+  border-radius: 10px;
+
 }
