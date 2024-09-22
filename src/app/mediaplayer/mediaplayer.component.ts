@@ -13,6 +13,8 @@ export class MediaplayerComponent {
 
   constructor(private router: Router){}
 
+
+
   currentVideoSrc: string = 'assets/videos/test_video.mp4';
 
   backToOverview() {

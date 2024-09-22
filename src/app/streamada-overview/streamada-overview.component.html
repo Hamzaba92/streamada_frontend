@@ -46,17 +46,58 @@
     </header>
 
     <section *ngIf="selectedVideo" class="video-info">
-        <h1>Turtle</h1>
-        <p>The video "Turtel" follows the journey of a sea turtle across the ocean, exploring its natural habitat.
-            Stunning underwater scenes capture the beauty of marine life, from coral reefs to vast open waters. The
-            turtle's daily struggles for survival are shown, including its interactions with predators and the hunt for
-            food. Along the way, viewers learn about the challenges marine animals face due to environmental changes.
-            The documentary highlights the importance of ocean conservation and protecting endangered species like sea
-            turtles. It's both an educational and visually captivating experience for all ages.</p>
+        <h1>Lorem ipsum</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit similique, ad rem ullam temporibus
+            sunt. Modi cupiditate molestiae sint magni, aperiam delectus sunt quos, explicabo cum facere deleniti optio
+            sapiente!</p>
         <p><strong>Genre:</strong> Documentary</p>
         <button (click)="openMediaPlayer()" class="btn btn-primary">Play</button>
     </section>
 
+
+    <section class="video-genre">
+        <!-- Documentry Genre -->
+        <div class="documentary-genre">
+            <h2>Documentary</h2>
+            <div class="items-container">
+                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+            </div>
+        </div>
+        
+        <!-- Adventure Genre -->
+        <div class="adventure-genre">
+            <h2>Adventure</h2>
+            <div class="items-container">
+                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+            </div>
+        </div>
+    
+        <!-- Western Genre -->
+        <div class="western-genre">
+            <h2>Western</h2>
+            <div class="items-container">
+                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+            </div>
+        </div>
+    
+        <!-- Romance Genre -->
+        <div class="romance-genre">
+            <h2>Romance</h2>
+            <div class="items-container">
+                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+            </div>
+        </div>
+    
+        <!-- My List Genre -->
+        <div class="my-list-genre">
+            <h2>My List</h2>
+            <div class="items-container">
+                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+            </div>
+        </div>
+    </section>
+    
+    
 
 
 

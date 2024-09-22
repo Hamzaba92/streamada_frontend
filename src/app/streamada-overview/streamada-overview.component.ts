@@ -97,4 +97,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
     this.router.navigate(['mediaplayer']);
   }
 
+
+  items = [1, 2, 3, 4, 5];
+
 }
