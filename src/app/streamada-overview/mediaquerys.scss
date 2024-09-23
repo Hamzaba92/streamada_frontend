@@ -46,7 +46,19 @@
         }
     }
 
+}
 
+@media (max-width: 400px) {
+    .navbar {
+        button {
+            margin-right: 10px!important;
+            width: 93px!important;
+            font-size: 12px!important;
+            &:hover {
+                background-color: $net_red;
+            }
+        }
+    }
 }
 
 

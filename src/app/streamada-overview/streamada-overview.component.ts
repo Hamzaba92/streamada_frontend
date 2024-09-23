@@ -34,20 +34,20 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
   }
 
   playPreview(event: Event, videoSrc: string): void {
-    event.stopPropagation(); 
-    this.selectedVideo = videoSrc; 
+    event.stopPropagation();
+    this.selectedVideo = videoSrc;
     this.currentVideoSrc = videoSrc;
   }
-  
+
 
   playVideo(event: Event, videoSrc: string): void {
     if (!this.backgroundVideoRef?.nativeElement) {
       console.error('Background video element not found');
       return;
     }
-    
+
     const backgroundVideo = this.backgroundVideoRef.nativeElement;
-    
+
     try {
       this.currentVideoSrc = videoSrc;
       backgroundVideo.src = videoSrc;
@@ -86,22 +86,43 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
       thumbnail: 'assets/videos/thumbnail.jpg',
       description: 'Eine Reise mit einer Schildkröte.',
       genre: 'Dokumentation'
+    },
+    {
+      title: 'Cowboy escape from the Indians',
+      src: 'assets/videos/cowboy_test.mp4',
+      thumbnail: 'assets/videos/cowboy_thumbnail.png',
+      description: 'Common tThe procharacters who e and rugged idividualism',
+      genre: 'Western'
+    },
+    {
+      title: 'HongKong',
+      src: 'assets/videos/hongkong_test.mp4',
+      thumbnail: 'assets/videos/hongkong_thumbnail.png',
+      description: 'Common tThe procharacters who e and rugged idividualism',
+      genre: 'Adventure'
+    },
+    {
+      title: 'Soccer',
+      src: 'assets/videos/soccer_test.mp4',
+      thumbnail: 'assets/videos/soccer_thumbnail.png',
+      description: 'Common tThe procharacters who e and rugged idividualism',
+      genre: 'Sport'
     }
   ];
 
   logoutUser() {
     this.router.navigate(['landingpage']);
   }
-   
-  openMediaPlayer(){
+
+  openMediaPlayer() {
     this.router.navigate(['mediaplayer']);
   }
 
-  openPrivacyPolicy(){
+  openPrivacyPolicy() {
     window.open('privacypolicy', '_blank');
   }
 
-  openImprint(){
+  openImprint() {
     window.open('imprint', '_blank');
   }
 

@@ -85,7 +85,7 @@ header.video-playing-loop-atf {
   height: calc(26vh);
   z-index: 2;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: self-start;
   flex-direction: column;
   gap: 10px;
@@ -99,8 +99,24 @@ header.video-playing-loop-atf {
     display: none; /* Chrome, Safari und Opera */
   }
 
-  h2{
+  .title-container {
+    display: flex;
+    gap: 10px; 
+  }
+
+  .title-icon {
+    width: 34px; 
+    height: auto; 
+    filter: invert(1);
+  }
+
+  h2 {
     margin: 0;
+    font-size: 1.5rem;
+    color: white;
+    b{
+      color: $net_red;
+    }
   }
 }
 
@@ -115,10 +131,14 @@ header.video-playing-loop-atf {
   color: white;
   text-align: center;
   transition: transform 0.3s ease;
+  flex: 1 1 auto; // Flexibles Wachstum und Schrumpfen der Elemente
+  flex-shrink: 1; // Erlaubt das Verkleinern der Videos
 
   img {
-    width: 200px;
+    width: 100%; // Bilder passen sich dem flex-Container an
+    max-width: 200px; // Startgröße
     border-radius: 10px;
+    transition: width 0.3s ease; // Weiche Übergänge beim Verkleinern
   }
 }
 

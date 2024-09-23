@@ -25,7 +25,10 @@
         </video>
 
         <section class="new-on-streamada">
-            <h2>New on Stremada</h2>
+            <div class="title-container">
+                <h2>New on <b>Streamada</b></h2>
+                <img src="./../../assets/horizontal_scroll1.png" alt="scroll icon" class="title-icon">
+            </div>
             <div class="video-container">
                 <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video.src)">
                     <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
@@ -63,7 +66,7 @@
                 <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
             </div>
         </div>
-        
+
         <!-- Adventure Genre -->
         <div class="adventure-genre">
             <h2>Adventure</h2>
@@ -71,7 +74,7 @@
                 <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
             </div>
         </div>
-    
+
         <!-- Western Genre -->
         <div class="western-genre">
             <h2>Western</h2>
@@ -79,7 +82,7 @@
                 <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
             </div>
         </div>
-    
+
         <!-- Romance Genre -->
         <div class="romance-genre">
             <h2>Romance</h2>
@@ -87,7 +90,7 @@
                 <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
             </div>
         </div>
-    
+
         <!-- My List Genre -->
         <div class="my-list-genre">
             <h2>My List</h2>
@@ -96,8 +99,8 @@
             </div>
         </div>
     </section>
-    
-    
+
+
 
     <section class="pp-imprint">
         <div (click)="openPrivacyPolicy()">PrivacyPolicy</div>
