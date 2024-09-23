@@ -24,15 +24,19 @@ import { trigger, transition, style, animate } from '@angular/animations';
 
 export class StartAnimationComponent {
 
-  isVisible = true;
+  isVisible: boolean = true;
 
   constructor(public startAnimationService: StartAnimationService) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.isVisible = false;
-      this.startAnimationService.hideAnimation();
-    }, 4000); 
+    if (this.startAnimationService.getAnimationStatus()) {
+      setTimeout(() => {
+        this.isVisible = false;
+        this.startAnimationService.hideAnimation();
+      }, 4000);
+    } else {
+      this.isVisible = false; 
+    }
   }
 }
 

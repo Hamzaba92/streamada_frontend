@@ -20,23 +20,23 @@ export class AppComponent {
   constructor(public startAnimationService: StartAnimationService, private router: Router){}
 
   ngOnInit() {
-    // Überwache die Route nur einmal nach dem ersten vollständigen Laden
+    
     this.router.events
       .pipe(
-        filter(event => event instanceof NavigationEnd),
-        first() // Nur einmal ausführen, um den Performance-Einfluss zu minimieren
+        filter((event: any) => event instanceof NavigationEnd),
+        first() 
       )
-      .subscribe((event: any) => {
-        const url = event.urlAfterRedirects;
-
-        // Prüfe, ob die Route NICHT zu PrivacyPolicy oder Imprint gehört
-        if (url !== '/privacypolicy' && url !== '/imprint') {
-          // Animation anzeigen
+      .subscribe((event: NavigationEnd) => {
+        const urlPath = event.urlAfterRedirects.split('?')[0];
+        const excludedRoutes = ['/privacypolicy', '/imprint'];
+  
+        if (!excludedRoutes.includes(urlPath)) {
           this.startAnimationService.showAnimation();
         } else {
-          // Animation nicht anzeigen
           this.startAnimationService.hideAnimation();
         }
       });
   }
+  
+  
 }

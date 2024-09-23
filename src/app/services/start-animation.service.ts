@@ -10,16 +10,14 @@ export class StartAnimationService {
   constructor() {}
 
   showAnimation() {
-    if (!this.isAnimationVisible) {
-      this.isAnimationVisible = true;
-    }
+    this.isAnimationVisible = true;
   }
 
   hideAnimation() {
     this.isAnimationVisible = false;
   }
 
-  getAnimationStatus() {
+  getAnimationStatus(): boolean {
     return this.isAnimationVisible;
   }
 }

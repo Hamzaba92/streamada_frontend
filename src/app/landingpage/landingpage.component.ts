@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { StartAnimationService } from '../services/start-animation.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -10,7 +11,11 @@ import { Router } from '@angular/router';
 })
 export class LandingpageComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private startAnimationService: StartAnimationService){}
+
+  ngOnInit(): void {
+    this.startAnimationService.showAnimation();
+  }
 
   openLoginComp(){
     this.router.navigate(['/login']);
