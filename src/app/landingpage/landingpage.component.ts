@@ -20,4 +20,12 @@ export class LandingpageComponent {
     this.router.navigate(['/register']);
   }
 
+  openPP(){
+    window.open('privacypolicy', '_blank');
+  }
+
+  openImprint(){
+    window.open('imprint', '_blank');
+  }
+
 }
