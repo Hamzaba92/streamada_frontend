@@ -1,0 +1,20 @@
+@media (max-width:500px) {
+    .overcontainer-register {
+
+        form {
+            width: 300px !important;
+
+            mat-error {
+                font-size: 12px;
+            }
+
+            .specific-password-error {
+                font-size: 8px !important;
+            }
+
+            .specific-error-txt-confirm-password {
+                font-size: 11px !important;
+            }
+        }
+    }
+}

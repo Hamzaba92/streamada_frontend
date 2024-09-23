@@ -43,4 +43,8 @@ export class ResetPasswordComponent {
   goToLoginComp(){
     this.router.navigate(['login']);
   }
+
+  onSubmit(){
+    //
+  }
 }

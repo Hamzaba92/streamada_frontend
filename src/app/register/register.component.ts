@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormsModule } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -31,30 +31,30 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router) { }
 
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  passwordFormControl = new FormControl('', [
-    Validators.required,
-    Validators.minLength(8),
-    Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)]);
+  registerForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+    ]),
+    confirmPassword: new FormControl('', [Validators.required]),
+  });
 
-
-  confirmPasswordFormControl = new FormControl('', [Validators.required]);
   matcher = new MyErrorStateMatcher();
 
   get passwordsMatch(): boolean {
-    return this.passwordFormControl.value === this.confirmPasswordFormControl.value;
+    const password = this.registerForm.get('password')?.value;
+    const confirmPassword = this.registerForm.get('confirmPassword')?.value;
+    return password === confirmPassword;
   }
-
-  firstName = '';
-  lastName = '';
-  email = '';
-
 
   hidePassword = true;
   hideConfirmPassword = true;
-
 
   togglePasswordVisibility(type: string): void {
     if (type === 'password') {
@@ -64,8 +64,13 @@ export class RegisterComponent {
     }
   }
 
-  backtoLandingpage(){
-    this.router.navigate(['/landingpage']);
+  backtoLandingpage() {
+    this.router.navigate(['landingpage']);
   }
 
+  onSubmit() {
+    if (this.registerForm.valid && this.passwordsMatch) {
+      // Registrierung logik hier
+    }
+  }
 }

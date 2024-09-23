@@ -1,0 +1,74 @@
+.logo-container svg {
+    width: 50vw;
+    height: auto;
+  }
+  
+  @media (max-width: 768px) {
+    .logo-container svg {
+      width: 70vw; 
+    }
+  
+    .light-bar {
+      width: 300vw;
+      height: 18vh; 
+    }
+  
+    .bar1 {
+      top: 0%;
+    }
+  
+    .bar2 {
+      top: 18%;
+    }
+  
+    .bar3 {
+      top: 36%;
+    }
+  
+    .bar4 {
+      top: 54%;
+    }
+  
+    .bar5 {
+      top: 72%;
+    }
+  
+    .bar6 {
+      top: 90%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo-container svg {
+      width: 80vw; 
+    }
+  
+    .light-bar {
+      width: 400vw; 
+      height: 22vh; 
+    }
+  
+    .bar1 {
+      top: 0%;
+    }
+  
+    .bar2 {
+      top: 22%;
+    }
+  
+    .bar3 {
+      top: 44%;
+    }
+  
+    .bar4 {
+      top: 66%;
+    }
+  
+    .bar5 {
+      top: 88%;
+    }
+  
+    .bar6 {
+     top: 90%;
+    }
+  }

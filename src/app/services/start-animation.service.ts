@@ -5,12 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class StartAnimationService {
 
-  constructor() { }
-
   private isAnimationVisible = true;
 
+  constructor() {}
+
   showAnimation() {
-    this.isAnimationVisible = true;
+    if (!this.isAnimationVisible) {
+      this.isAnimationVisible = true;
+    }
   }
 
   hideAnimation() {

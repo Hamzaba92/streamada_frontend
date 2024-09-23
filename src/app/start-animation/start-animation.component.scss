@@ -1,3 +1,5 @@
+@import 'mediaquery.scss';
+
 body {
   margin: 0;
   background: black;
@@ -5,7 +7,7 @@ body {
 }
 
 .streamada-animation {
-  position: fixed; /* Fixiert die Animation über dem gesamten Viewport */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -15,9 +17,9 @@ body {
   align-items: center;
   overflow: hidden;
   background: black;
-  z-index: 9999; /* Hoher Z-Index, um über allen anderen Inhalten zu liegen */
-  animation: fadeOut 2.5s forwards ease-in-out 2.6s; /* Behalte die Animation bei */
-  pointer-events: none; /* Verhindert, dass Benutzer mit der Animation interagieren */
+  z-index: 9999;
+  animation: fadeOut 2.5s forwards ease-in-out 2.6s;
+  pointer-events: none;
 }
 
 .light-bar {
@@ -65,15 +67,19 @@ body {
   animation: logoAppear 1.8s forwards ease-in-out 0.9s;
 }
 
+
+
 @keyframes slideHorizontal {
   0% {
     transform: translateX(-100%);
     opacity: 0.6;
   }
+
   50% {
     transform: translateX(0);
     opacity: 0.9;
   }
+
   100% {
     transform: translateX(100%);
     opacity: 0;
@@ -85,6 +91,7 @@ body {
     opacity: 0;
     transform: scale(1);
   }
+
   100% {
     opacity: 1.2;
     transform: scale(1.1);
@@ -95,10 +102,9 @@ body {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
-   
+
   }
 }
-
-
