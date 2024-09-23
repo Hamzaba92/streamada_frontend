@@ -286,6 +286,20 @@ header.video-playing-loop-atf {
 }
 
 
-
+.pp-imprint{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 112px;
+  div{
+    color: white;
+    z-index: 4;
+    &:hover{
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}
 
 
