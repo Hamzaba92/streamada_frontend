@@ -1,4 +1,5 @@
 @import '../../colors.scss';
+@import 'mediaquery.scss';
 
 .navbar svg {
   max-width: 170px;
@@ -39,6 +40,7 @@ main {
   flex-direction: column;
   color: white;
   overflow: hidden;
+
   &::before {
     content: '';
     position: absolute;
@@ -56,6 +58,7 @@ main {
     min-height: 244px;
     width: 650px;
     text-align: center;
+
     span {
       font-size: 22px;
     }
@@ -92,7 +95,8 @@ main {
           border-color: $net_red;
           box-shadow: none;
         }
-        &::placeholder{
+
+        &::placeholder {
           color: white;
           opacity: 1;
         }
@@ -100,28 +104,29 @@ main {
     }
   }
 
-  .imprint-privacypolicy{
-   z-index: 2;
-   display: flex;
-   gap: 78px;
-   padding-top: 48px;
+  .imprint-privacypolicy {
+    z-index: 2;
+    display: flex;
+    gap: 78px;
+    padding-top: 48px;
 
-   .privacy-policy{
-    text-decoration: underline;
-    &:hover{
-      cursor: pointer;
-      color: $net_red;
-    }
-   }
+    .privacy-policy {
+      text-decoration: underline;
 
-   .imprint{
-    text-decoration: underline;
-    
-    &:hover{
-      cursor: pointer;
-      color: $net_red;
+      &:hover {
+        cursor: pointer;
+        color: $net_red;
+      }
     }
-   }
+
+    .imprint {
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+        color: $net_red;
+      }
+    }
 
   }
 
