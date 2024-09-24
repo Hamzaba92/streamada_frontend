@@ -34,7 +34,6 @@
                     <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
 
                     <div class="hover-dialog" (click)="onHoverDialogClick($event)">
-                        <img [src]="video.thumbnail" [alt]="video.title" class="hover-preview">
                         <h4>{{ video.title }}</h4>
                         <div class="play-button">
                             <button (click)="openMediaPlayer()">&blacktriangleright;</button>
@@ -92,13 +91,12 @@
 
         <!-- My List Genre -->
         <div class="my-list-genre">
-            <h2>My List</h2>
+            <h2>My Favorite</h2>
             <div class="items-container">
                 <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
             </div>
         </div>
     </section>
-
 
 
     <section class="pp-imprint">
@@ -109,3 +107,4 @@
 
 
 </main>
+

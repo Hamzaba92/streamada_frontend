@@ -48,6 +48,72 @@
 
 }
 
+@media (max-width: 465px) {
+    // Video-Genre Section - Horizontal Fields
+.video-genre {
+    display: flex;
+    flex-direction: column; // Die Genres vertikal anordnen
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 25px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 3;
+  
+    // Genre-Container spezifisch für jedes Genre
+    .documentary-genre,
+    .adventure-genre,
+    .western-genre,
+    .romance-genre,
+    .my-list-genre {
+      width: 100%;
+      display: flex;
+      flex-direction: column; 
+      align-items: flex-start; 
+      gap: 10px; 
+      padding: 10px;
+      background-color: black;
+      border-radius: 10px;
+  
+      h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        color: white;
+        padding-left: 10px;
+        padding-bottom: 10px;
+      }
+  
+      .items-container {
+        display: flex;
+        flex-direction: column!important;
+        gap: 20px;
+        flex-wrap: nowrap!important;
+        width: 100%;
+        padding-left: 10px;
+        align-items: center;
+      }
+
+  
+      .genre-item {
+        width: 200px;
+        height: 112.5px;
+        background-color: rgba(54, 51, 51, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        border-radius: 10px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+  
+        &:hover {
+          transform: scale(1.05);
+          background-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+  }
+}
+
 @media (max-width: 400px) {
     .navbar {
         button {

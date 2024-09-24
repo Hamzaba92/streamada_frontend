@@ -81,7 +81,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
       genre: 'Abenteuer'
     },
     {
-      title: 'Turtel',
+      title: 'Ninja-Turtel under the sea',
       src: 'assets/videos/test2.mp4',
       thumbnail: 'assets/videos/thumbnail.jpg',
       description: 'Eine Reise mit einer Schildkröte.',
@@ -102,7 +102,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
       genre: 'Adventure'
     },
     {
-      title: 'Soccer',
+      title: 'Soccer - Messis wonderkid',
       src: 'assets/videos/soccer_test.mp4',
       thumbnail: 'assets/videos/soccer_thumbnail.png',
       description: 'Common tThe procharacters who e and rugged idividualism',
@@ -130,18 +130,6 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
     event.stopPropagation();
   }
 
-  positionHoverDialog(event: MouseEvent, videoElement: HTMLElement) {
-    const hoverDialog = document.querySelector('.hover-dialog') as HTMLElement;
-  
-    if (hoverDialog) {
-      const rect = videoElement.getBoundingClientRect();
-      
-      hoverDialog.style.left = `${rect.left}px`;
-      hoverDialog.style.top = `${rect.bottom}px`; 
-      hoverDialog.style.position = 'absolute';
-      hoverDialog.style.visibility = 'visible';
-    }
-  }
 
   items = [1, 2, 3, 4, 5];
 
