@@ -26,7 +26,8 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, CommonModule, ReactiveFormsModule, MatIconModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, CommonModule, ReactiveFormsModule, MatIconModule,
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
@@ -35,6 +36,7 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private router: Router, private emailService: EmailService) { }
 
   email: string = '';
+  showPopup: boolean = false;
 
 
 
@@ -92,7 +94,14 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid && this.passwordsMatch) {
-      // Registrierung logik hier
+      console.log('erfolgreich registriert');
+      this.showPopup = true;
+      
     }
   }
+
+  closePopup() {
+    this.showPopup = false;
+  }
+
 }

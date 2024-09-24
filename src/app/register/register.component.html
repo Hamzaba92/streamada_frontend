@@ -1,88 +1,102 @@
 <nav class="navbar">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand">
-            <svg viewBox="0 0 1000 200" width="190px" height="50px">
-                <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
-                <text fill="#E50914" font-size="120" font-weight="bold" letter-spacing="25">
-                    <textPath href="#curved-path" startOffset="0%">
-                        STREAMADA
-                    </textPath>
-                </text>
-            </svg>
-        </a>
-    </div>
-    <button type="button" class="btn btn-outline-danger" (click)="backtoLandingpage()">Back</button>
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand">
+      <svg viewBox="0 0 1000 200" width="190px" height="50px">
+        <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
+        <text fill="#E50914" font-size="120" font-weight="bold" letter-spacing="25">
+          <textPath href="#curved-path" startOffset="0%">
+            STREAMADA
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <button type="button" class="btn btn-outline-danger" (click)="backtoLandingpage()">Back</button>
 </nav>
 
 <main class="overcontainer-register">
 
 
-    <form [formGroup]="registerForm" class="example-form" (ngSubmit)="onSubmit()">
-        <h1>Sign Up</h1>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>First Name</mat-label>
-          <input matInput placeholder="First Name" formControlName="firstName" required>
-          <mat-error *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
-            First Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="Last Name" formControlName="lastName" required>
-          <mat-error *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
-            Last Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="email" placeholder="youremail@example.com">
-          <mat-error *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">
-            Please enter a valid email
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>Password</mat-label>
-          <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password">
-          <mat-icon matSuffix (click)="togglePasswordVisibility('password')" [attr.aria-label]="'Toggle password visibility'"
-            [attr.aria-pressed]="hidePassword" style="cursor: pointer;">
-            {{ hidePassword ? 'visibility_off' : 'visibility' }}
-          </mat-icon>
-          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-            Password is <strong>required</strong>.
-          </mat-error>
-          <mat-error class="specific-password-error" *ngIf="registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('pattern')">
-            Min. 8 characters, must include 1 letter, 1 number, and 1 special character.
-          </mat-error>
-        </mat-form-field>
-      
-        <mat-form-field class="example-full-width">
-          <mat-label>Conf. Password</mat-label>
-          <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"
-            placeholder="Conf. Password">
-          <mat-icon matSuffix (click)="togglePasswordVisibility('confirmPassword')"
-            [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hideConfirmPassword"
-            style="cursor: pointer;">
-            {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
-          </mat-icon>
-          <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
-            <span class="specific-error-txt-confirm-password">Confirm Password is <strong>required</strong></span>
-          </mat-error>
-          <mat-hint *ngIf="!passwordsMatch && registerForm.get('confirmPassword')?.touched">
-            No match
-          </mat-hint>
-        </mat-form-field>
-      
-        <button type="submit" class="btn btn-outline-danger" [disabled]="!registerForm.valid || !passwordsMatch">Sign up</button>
-      </form>
-      
-      
+  <form [formGroup]="registerForm" class="example-form" (ngSubmit)="onSubmit()">
+    <h1>Sign Up</h1>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="First Name" formControlName="firstName" required>
+      <mat-error *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched">
+        First Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Last Name" formControlName="lastName" required>
+      <mat-error *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched">
+        Last Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Email</mat-label>
+      <input type="email" matInput formControlName="email" placeholder="youremail@example.com">
+      <mat-error
+        *ngIf="registerForm.get('email')?.hasError('email') && !registerForm.get('email')?.hasError('required')">
+        Please enter a valid email
+      </mat-error>
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password">
+      <mat-icon matSuffix (click)="togglePasswordVisibility('password')"
+        [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hidePassword" style="cursor: pointer;">
+        {{ hidePassword ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+        Password is <strong>required</strong>.
+      </mat-error>
+      <mat-error class="specific-password-error"
+        *ngIf="registerForm.get('password')?.hasError('minlength') || registerForm.get('password')?.hasError('pattern')">
+        Min. 8 characters, must include 1 letter, 1 number, and 1 special character.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Conf. Password</mat-label>
+      <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword"
+        placeholder="Conf. Password">
+      <mat-icon matSuffix (click)="togglePasswordVisibility('confirmPassword')"
+        [attr.aria-label]="'Toggle password visibility'" [attr.aria-pressed]="hideConfirmPassword"
+        style="cursor: pointer;">
+        {{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}
+      </mat-icon>
+      <mat-error *ngIf="registerForm.get('confirmPassword')?.hasError('required')">
+        <span class="specific-error-txt-confirm-password">Confirm Password is <strong>required</strong></span>
+      </mat-error>
+      <mat-hint *ngIf="!passwordsMatch && registerForm.get('confirmPassword')?.touched">
+        No match
+      </mat-hint>
+    </mat-form-field>
+
+    <button type="submit" class="btn btn-outline-danger" [disabled]="!registerForm.valid || !passwordsMatch">Sign
+      up</button>
+  </form>
+
+  <section *ngIf="showPopup" class="popup-banner">
+    <div class="popup-content">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark-check" fill="none" stroke-width="5" stroke="#7EC832" d="M14 27l7 7 16-16" />
+      </svg>
+      <h1>Success!</h1>
+      <p>Your registration was successful. Please check your email or spam folder for the activation link.</p>
+      <button (click)="closePopup()">OK</button>
+    </div>
+  </section>
+
 
 
 
