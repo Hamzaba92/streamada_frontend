@@ -1,17 +1,22 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { StartAnimationService } from '../services/start-animation.service';
+import { EmailService } from '../services/email.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.scss'
 })
 export class LandingpageComponent {
 
-  constructor(private router: Router, private startAnimationService: StartAnimationService){}
+  email: string = '';
+
+  constructor(private router: Router, private startAnimationService: StartAnimationService, private emailService: EmailService){}
 
   ngOnInit(): void {
     this.startAnimationService.showAnimation();
@@ -22,6 +27,7 @@ export class LandingpageComponent {
   }
 
   openSignUpComp(){
+    this.emailService.setEmail(this.email);
     this.router.navigate(['/register']);
   }
 

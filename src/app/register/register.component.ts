@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { FormGroup, FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import {
@@ -13,6 +13,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { EmailService } from '../services/email.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -31,7 +32,28 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class RegisterComponent {
 
-  constructor(private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private emailService: EmailService) { }
+
+  email: string = '';
+
+
+
+  ngOnInit(): void {
+    this.email = this.emailService.getEmail(); //get the email-input from the landingpage
+
+    this.registerForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: [this.email, [Validators.required, Validators.email]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      ]],
+      confirmPassword: ['', Validators.required]
+    });
+  }
+
 
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
