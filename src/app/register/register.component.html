@@ -81,6 +81,10 @@
       </mat-hint>
     </mat-form-field>
 
+    <div *ngIf="loading" class="spinner-border text-danger" role="status">
+      <span class="sr-only material-symbols-outlined">play_pause</span>
+    </div>
+
     <button type="submit" class="btn btn-outline-danger" [disabled]="!registerForm.valid || !passwordsMatch">Sign
       up</button>
   </form>
@@ -96,6 +100,8 @@
       <button (click)="closePopup()">OK</button>
     </div>
   </section>
+
+
 
 
 

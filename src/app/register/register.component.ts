@@ -37,7 +37,7 @@ export class RegisterComponent {
 
   email: string = '';
   showPopup: boolean = false;
-
+  loading: boolean = false;
 
 
   ngOnInit(): void {
@@ -55,7 +55,6 @@ export class RegisterComponent {
       confirmPassword: ['', Validators.required]
     });
   }
-
 
   registerForm = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
@@ -95,13 +94,21 @@ export class RegisterComponent {
   onSubmit() {
     if (this.registerForm.valid && this.passwordsMatch) {
       console.log('erfolgreich registriert');
-      this.showPopup = true;
+      this.loading = true;
+
+      //simuliert server-rendering
+      setTimeout(()=>{
+        this.loading = false;
+        this.showPopup = true;
+      }, 4000);
+ 
       
     }
   }
 
   closePopup() {
     this.showPopup = false;
+    location.reload();
   }
 
 }
