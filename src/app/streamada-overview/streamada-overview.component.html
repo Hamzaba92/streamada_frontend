@@ -32,8 +32,8 @@
             <div class="video-container">
                 <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video.src)">
                     <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
-                    <div class="hover-dialog">
 
+                    <div class="hover-dialog" (click)="onHoverDialogClick($event)">
                         <img [src]="video.thumbnail" [alt]="video.title" class="hover-preview">
                         <h4>{{ video.title }}</h4>
                         <div class="play-button">
@@ -41,7 +41,6 @@
                             <button (click)="playPreview($event, video.src)" type="button"
                                 class="btn btn-outline-danger">Preview</button>
                         </div>
-
                     </div>
                 </div>
             </div>

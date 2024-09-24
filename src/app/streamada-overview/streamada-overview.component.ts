@@ -74,7 +74,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   videos = [
     {
-      title: 'Wüsten Video',
+      title: 'An unbelievable adventure trough the Canyons',
       src: 'assets/videos/test_video.mp4',
       thumbnail: 'assets/videos/test_video_thumbnail.png',
       description: 'Ein aufregendes Abenteuer durch die Wüste.',
@@ -95,7 +95,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
       genre: 'Western'
     },
     {
-      title: 'HongKong',
+      title: 'HongKong the futuristic city of Asia',
       src: 'assets/videos/hongkong_test.mp4',
       thumbnail: 'assets/videos/hongkong_thumbnail.png',
       description: 'Common tThe procharacters who e and rugged idividualism',
@@ -124,6 +124,23 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   openImprint() {
     window.open('imprint', '_blank');
+  }
+
+  onHoverDialogClick(event: Event) {
+    event.stopPropagation();
+  }
+
+  positionHoverDialog(event: MouseEvent, videoElement: HTMLElement) {
+    const hoverDialog = document.querySelector('.hover-dialog') as HTMLElement;
+  
+    if (hoverDialog) {
+      const rect = videoElement.getBoundingClientRect();
+      
+      hoverDialog.style.left = `${rect.left}px`;
+      hoverDialog.style.top = `${rect.bottom}px`; 
+      hoverDialog.style.position = 'absolute';
+      hoverDialog.style.visibility = 'visible';
+    }
   }
 
   items = [1, 2, 3, 4, 5];

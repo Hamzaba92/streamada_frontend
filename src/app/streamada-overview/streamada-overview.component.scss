@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  z-index: 3;
+  z-index: 100;
   position: relative;
   height: 60px;
 
@@ -39,13 +39,12 @@
   background-color: $net_backgr;
   background-repeat: no-repeat;
   background-size: cover;
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: white;
-  overflow: hidden;
   z-index: 2;
 
   &::before {
@@ -83,7 +82,7 @@ header.video-playing-loop-atf {
   bottom: 0;
   width: 100%;
   height: calc(26vh);
-  z-index: 2;
+  z-index: 10;
   display: flex;
   justify-content: center;
   align-items: self-start;
@@ -92,21 +91,25 @@ header.video-playing-loop-atf {
   padding: 10px 20px 10px 20px;
   background: rgba(0, 0, 0, 0.7);
   overflow-x: auto;
-  white-space: nowrap;
-  scrollbar-width: none; /*for Firefox*/
-  -ms-overflow-style: none; /* IE and Edge */
+  overflow: visible;
+  scrollbar-width: none;
+  /*for Firefox*/
+  -ms-overflow-style: none;
+
+  /* IE and Edge */
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari und Opera */
+    display: none;
+    /* Chrome, Safari und Opera */
   }
 
   .title-container {
     display: flex;
-    gap: 10px; 
+    gap: 10px;
   }
 
   .title-icon {
-    width: 34px; 
-    height: auto; 
+    width: 34px;
+    height: auto;
     filter: invert(1);
   }
 
@@ -114,15 +117,30 @@ header.video-playing-loop-atf {
     margin: 0;
     font-size: 1.5rem;
     color: white;
-    b{
+
+    b {
       color: $net_red;
     }
   }
 }
 
-.video-container{
+.video-container {
+  position: relative;
+  overflow: visible;
   display: flex;
   gap: 20px;
+  max-width: 1200px;
+  z-index: 5;
+  flex-wrap: nowrap;
+  scrollbar-width: none;
+  /* Für Firefox */
+  -ms-overflow-style: none;
+  /* Für Internet Explorer und Edge */
+}
+
+.video-container::-webkit-scrollbar {
+  display: none;
+  /* Für Chrome, Safari und Opera */
 }
 
 .video-item {
@@ -131,14 +149,14 @@ header.video-playing-loop-atf {
   color: white;
   text-align: center;
   transition: transform 0.3s ease;
-  flex: 1 1 auto; // Flexibles Wachstum und Schrumpfen der Elemente
-  flex-shrink: 1; // Erlaubt das Verkleinern der Videos
+  flex: 0 0 auto;
+  overflow: visible;
 
   img {
-    width: 100%; // Bilder passen sich dem flex-Container an
-    max-width: 200px; // Startgröße
+    width: 100%;
+    max-width: 200px;
     border-radius: 10px;
-    transition: width 0.3s ease; // Weiche Übergänge beim Verkleinern
+    transition: width 0.3s ease;
   }
 }
 
@@ -152,17 +170,20 @@ header.video-playing-loop-atf {
   border-radius: 10px;
   visibility: hidden;
   opacity: 0;
-  z-index: 3;
+  z-index: 10;
+  clip-path: inset(0 0 0 0);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  transform: translateY(0);
 
   .hover-preview {
     width: 100%;
     border-radius: 10px;
   }
 
-  h3 {
+  h4 {
     color: white;
     margin-top: 10px;
+    font-size: 0.8rem;
   }
 
   .play-button {
@@ -197,6 +218,7 @@ header.video-playing-loop-atf {
       border-radius: 5px;
       padding: 10px;
       transition: background-color 0.2s ease;
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.2);
       }
@@ -208,8 +230,8 @@ header.video-playing-loop-atf {
   .hover-dialog {
     visibility: visible;
     opacity: 1;
-    pointer-events: none;
-    cursor: none;
+    pointer-events: auto;
+    cursor: default;
   }
 }
 
@@ -223,21 +245,22 @@ header.video-playing-loop-atf {
 .video-info {
   position: absolute;
   top: 5%;
-  left: 0; 
+  left: 0;
   background: transparent;
   color: white;
   max-width: 39vw;
   height: auto;
-  z-index: 5; 
-  text-align: start; 
+  z-index: 5;
+  text-align: start;
   padding-left: 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
-  h1{
+  h1 {
     margin-top: 18px;
   }
+
   button {
     margin-top: 10px;
     background-color: $net_red;
@@ -257,10 +280,10 @@ header.video-playing-loop-atf {
 // Video-Genre Section - Horizontal Fields
 .video-genre {
   display: flex;
-  flex-direction: column;  // Die Genres vertikal anordnen
+  flex-direction: column; // Die Genres vertikal anordnen
   justify-content: flex-start;
   align-items: flex-start;
-  gap: 25px;  
+  gap: 25px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 3;
@@ -273,9 +296,9 @@ header.video-playing-loop-atf {
   .my-list-genre {
     width: 100%;
     display: flex;
-    flex-direction: column;  // Titel und die Items vertikal anordnen
-    align-items: flex-start;  // Links ausrichten
-    gap: 10px;  // Abstand zwischen Titel und Items
+    flex-direction: column; // Titel und die Items vertikal anordnen
+    align-items: flex-start; // Links ausrichten
+    gap: 10px; // Abstand zwischen Titel und Items
     padding: 10px;
     background-color: black;
     border-radius: 10px;
@@ -284,14 +307,14 @@ header.video-playing-loop-atf {
       margin: 0;
       font-size: 1.5rem;
       color: white;
-      padding-left: 10px;  // Linksabstand für Titel
+      padding-left: 10px; // Linksabstand für Titel
     }
 
     .items-container {
       display: flex;
-      flex-direction: row;  // Items horizontal anordnen
-      gap: 20px;  // Abstand zwischen den Items
-      flex-wrap: wrap;  // Umbrüche zulassen, falls nötig
+      flex-direction: row; // Items horizontal anordnen
+      gap: 20px; // Abstand zwischen den Items
+      flex-wrap: wrap; // Umbrüche zulassen, falls nötig
       width: 100%;
       padding-left: 10px;
     }
@@ -316,21 +339,21 @@ header.video-playing-loop-atf {
 }
 
 
-.pp-imprint{
+.pp-imprint {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 112px;
-  div{
+
+  div {
     color: white;
     z-index: 4;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       text-decoration: underline;
       color: $net_red;
     }
   }
 }
-
-
