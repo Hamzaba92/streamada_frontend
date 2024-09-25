@@ -39,6 +39,7 @@ export class LoginComponent {
   hide = true;
 
   loading: Boolean = false;
+  showpopup: boolean = false;
 
   constructor(private router: Router){}
 
@@ -56,5 +57,20 @@ export class LoginComponent {
 
   openForgetPasswordComp(){
     this.router.navigate(['forget-password']);
+  }
+
+
+  onSubmit(){
+    if(this.emailFormControl && this.passwordFormControl){
+      console.log('login erfolgreich!')
+      this.loading = true;
+      setTimeout(() => {
+        this.showpopup = true;
+      }, 3000);
+      this.showpopup = false;
+    }else{
+      //hier wird serverseite errormeldungen reingerendert
+      
+    }
   }
 }

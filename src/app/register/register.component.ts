@@ -102,7 +102,6 @@ export class RegisterComponent {
         this.showPopup = true;
       }, 4000);
  
-      
     }
   }
 
