@@ -27,6 +27,8 @@ export class ResetPasswordComponent {
   hideConfirmPassword: boolean = true;
   passwordsMatch: boolean = true;
   passwordPattern: RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  loading: boolean = false;
+  showpopup: boolean = false;
 
   togglePasswordVisibility(type: string): void {
     if (type === 'password') {
@@ -44,7 +46,21 @@ export class ResetPasswordComponent {
     this.router.navigate(['login']);
   }
 
-  onSubmit(){
-    //
+  closePopup(){
+    this.showpopup = false;
+    location.reload();
+  }
+
+  onSubmit() {
+    if (!this.doPasswordsMatch()) {
+      //server-antwort rein rendern!
+    } else {
+      console.log('Form submitted successfully');
+      this.loading = true; 
+      setTimeout(() => {
+        this.loading = false;
+        this.showpopup = true;
+      }, 4000);
+    }
   }
 }
