@@ -64,56 +64,60 @@
     flex-direction: column;
     align-items: center;
 
-    h1{
+    h1 {
       margin-top: 16px;
     }
-    
+
     button {
       margin-top: 16px;
       color: white;
       border-color: $net_red;
+
       &:hover {
         background-color: $net_red;
       }
     }
-    
-    form{
+
+    form {
       display: flex;
       flex-direction: column;
 
-      .text-danger{
+      .text-danger {
         align-self: center;
-        color: $net_red!important;
+        color: $net_red !important;
       }
 
-      .forget-pw-txt{
+      .forget-pw-txt {
         display: flex;
         justify-content: center;
         margin-top: 16px;
         color: $net_red;
-        &:hover{
+
+        &:hover {
           cursor: pointer;
           text-decoration: underline;
         }
       }
     }
-    
-  
-    mat-form-field{
-       margin-top: 20px;
+
+
+    mat-form-field {
+      margin-top: 20px;
     }
+
     mat-label {
       padding-top: 35px;
       display: flex;
     }
-    mat-error{
+
+    mat-error {
       color: $net_red;
     }
 
   }
 }
 
-.new-to-streamada{
+.new-to-streamada {
   font-size: 10px;
   display: flex;
   margin-top: 16px;
@@ -121,9 +125,10 @@
   justify-content: center;
   column-gap: 16px;
 
-  p{
+  p {
     color: $net_red;
-    &:hover{
+
+    &:hover {
       cursor: pointer;
       text-decoration: underline;
     }

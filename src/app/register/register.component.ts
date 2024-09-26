@@ -11,9 +11,12 @@ import {
   NgForm,
   Validators,
   ReactiveFormsModule,
+
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmailService } from '../services/email.service';
+import { RegisterService } from '../services/register.service';
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -23,17 +26,22 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   }
 }
 
+
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, CommonModule, ReactiveFormsModule, MatIconModule,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, CommonModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
 
-  constructor(private fb: FormBuilder, private router: Router, private emailService: EmailService) { }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private emailService: EmailService,
+    private registerservice: RegisterService
+  ) { }
 
   email: string = '';
   showPopup: boolean = false;
@@ -91,23 +99,37 @@ export class RegisterComponent {
     this.router.navigate(['landingpage']);
   }
 
-  onSubmit() {
-    if (this.registerForm.valid && this.passwordsMatch) {
-      console.log('erfolgreich registriert');
-      this.loading = true;
-
-      //simuliert server-rendering
-      setTimeout(()=>{
-        this.loading = false;
-        this.showPopup = true;
-      }, 4000);
- 
-    }
-  }
 
   closePopup() {
     this.showPopup = false;
     location.reload();
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid && this.passwordsMatch) {
+
+      const formData = this.registerForm.value;
+      const userData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        password: formData.password,
+        confirm_password: formData.confirmPassword
+      };
+
+      this.loading = true;
+      this.registerservice.register(userData).subscribe(
+        response => {
+          console.log('user successfully registered', response);
+          this.loading = false;
+          this.showPopup = true;
+        },
+        error => {
+          console.log('error registering user', error);
+          this.loading = false; 
+        }
+      );
+    }
   }
 
 }

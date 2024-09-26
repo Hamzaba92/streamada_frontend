@@ -11,7 +11,8 @@ import { filter, first } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, StartAnimationComponent, LandingpageComponent, CommonModule, LoginComponent, RegisterComponent],
+  imports: [RouterOutlet, StartAnimationComponent, LandingpageComponent, CommonModule,
+    LoginComponent, RegisterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

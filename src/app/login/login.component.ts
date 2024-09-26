@@ -64,13 +64,14 @@ export class LoginComponent {
     if(this.emailFormControl && this.passwordFormControl){
       console.log('login erfolgreich!')
       this.loading = true;
+      this.showpopup = true;
       setTimeout(() => {
-        this.showpopup = true;
+        this.showpopup = false;
+
       }, 3000);
-      this.showpopup = false;
     }else{
       //hier wird serverseite errormeldungen reingerendert
-      
+
     }
   }
 }
