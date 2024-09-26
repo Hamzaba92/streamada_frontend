@@ -85,6 +85,14 @@
       <span class="sr-only material-symbols-outlined">play_pause</span>
     </div>
 
+    <div *ngIf="backendErrors">
+      <div *ngFor="let errorKey of getBackendErrorKeys()">
+        <div *ngFor="let errorMsg of backendErrors[errorKey]">
+          <p class="error-message"><strong>{{ errorMsg }}</strong></p>
+        </div>
+      </div>
+    </div>
+
     <button type="submit" class="btn btn-outline-danger" [disabled]="!registerForm.valid || !passwordsMatch">Sign
       up</button>
   </form>

@@ -46,6 +46,7 @@ export class RegisterComponent {
   email: string = '';
   showPopup: boolean = false;
   loading: boolean = false;
+  backendErrors: any = null;
 
 
   ngOnInit(): void {
@@ -99,6 +100,9 @@ export class RegisterComponent {
     this.router.navigate(['landingpage']);
   }
 
+  getBackendErrorKeys(): string[] {
+    return Object.keys(this.backendErrors || {});
+  }
 
   closePopup() {
     this.showPopup = false;
@@ -126,7 +130,8 @@ export class RegisterComponent {
         },
         error => {
           console.log('error registering user', error);
-          this.loading = false; 
+          this.loading = false;
+          this.backendErrors = error.error;
         }
       );
     }
