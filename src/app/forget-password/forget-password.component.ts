@@ -35,7 +35,6 @@ export class ForgetPasswordComponent {
 
   onSubmit() {
     if (this.email) {
-      console.log('send');
       this.errorMessage = '';
       this.loading = true;
 

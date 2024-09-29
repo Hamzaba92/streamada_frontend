@@ -117,3 +117,13 @@
   color: $net_red;
   margin: 0;
 }
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 0px transparent inset !important;
+  box-shadow: 0 0 0px 0px transparent inset !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-color: transparent !important;
+  filter: invert(1);
+  font-weight: 500;
+}
