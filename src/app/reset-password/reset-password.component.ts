@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 })
 export class ResetPasswordComponent {
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private route: ActivatedRoute){}
 
   resetPassword: string = '';
   confirmPassword: string = '';
@@ -29,7 +29,15 @@ export class ResetPasswordComponent {
   passwordPattern: RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
   loading: boolean = false;
   showpopup: boolean = false;
+  uid: string = '';
+  token: string = '';
 
+  ngOnInit(): void {
+    // Abrufen von `uid` und `token` aus der URL
+    this.uid = this.route.snapshot.paramMap.get('uid') || '';
+    this.token = this.route.snapshot.paramMap.get('token') || '';
+  }
+  
   togglePasswordVisibility(type: string): void {
     if (type === 'password') {
       this.hidePassword = !this.hidePassword;

@@ -4,6 +4,8 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { PasswordResetService } from '../services/password-reset.service';
+
 
 @Component({
   selector: 'app-forget-password',
@@ -17,8 +19,9 @@ export class ForgetPasswordComponent {
 
   loading: boolean = false;
   showpopup: boolean = false;
+  errorMessage: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public passwortResetService: PasswordResetService) { }
 
   goToLoginComp() {
     this.router.navigate(['login']);
@@ -32,19 +35,26 @@ export class ForgetPasswordComponent {
 
   onSubmit() {
     if (this.email) {
-
       console.log('send');
-
+      this.errorMessage = '';
       this.loading = true;
 
-      setTimeout(() => {
-        this.loading = false;
-        this.showpopup = true;
-      }, 4000);
-      
+      this.passwortResetService.sendPasswordResetEmail(this.email).subscribe(
+        response => {
+          this.loading = false;
+          this.showpopup = true;
 
-
-
+        },
+        error => {
+          this.loading = false;
+          if (error.status === 400 && error.error.email) {
+            this.errorMessage = error.error.email[0];
+          } else {
+            this.errorMessage = 'An error occurred, please try again.';
+          }
+        }
+      );
     }
   }
 }
+

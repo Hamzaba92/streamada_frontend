@@ -18,7 +18,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'forget-password', component: ForgetPasswordComponent},
-    { path: 'reset-password', component: ResetPasswordComponent},
+    { path: 'reset-password/:uid/:token', component: ResetPasswordComponent},
     { path: 'streamada-overview', component: StreamadaOverviewComponent, canActivate: [AuthGuard]},
     { path: 'mediaplayer', component: MediaplayerComponent},
     { path: 'privacypolicy', component: PrivacyPolicyComponent},
