@@ -16,6 +16,7 @@ import {
 import { Router } from '@angular/router';
 import { EmailService } from '../services/email.service';
 import { RegisterService } from '../services/register.service';
+import { RegisterData, RegisterResponse } from './register.model';
 
 
 /** Error when invalid control is dirty, touched, or submitted. */
@@ -110,20 +111,20 @@ export class RegisterComponent {
   }
 
   onSubmit() {
-    if (this.registerForm.valid && this.passwordsMatch) {
+    if (this.registerForm.valid) {
 
       const formData = this.registerForm.value;
-      const userData = {
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        email: formData.email,
-        password: formData.password,
-        confirm_password: formData.confirmPassword
+      const userData: RegisterData = {
+        first_name: formData.firstName!,
+        last_name: formData.lastName!,
+        email: formData.email!,
+        password: formData.password!,
+        confirm_password: formData.confirmPassword!
       };
 
       this.loading = true;
       this.registerservice.register(userData).subscribe(
-        response => {
+        (response: RegisterResponse) => {
           console.log('user successfully registered', response);
           this.loading = false;
           this.showPopup = true;

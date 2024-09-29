@@ -47,7 +47,12 @@
                 <span class="sr-only material-symbols-outlined">play_pause</span>
               </div>
 
-              <button type="submit" class="btn btn-outline-danger">Log In</button>
+              <div *ngIf="errorMessage" class="err-from-backend">
+                <strong>{{ errorMessage }}</strong>
+              </div>
+
+              <button type="submit" class="btn btn-outline-danger" [disabled]="!this.emailFormControl.valid || !this.passwordFormControl.valid">Log In</button>
+
               <span class="forget-pw-txt" (click)="openForgetPasswordComp()">Forget password?</span>
               <div class="new-to-streamada">
                 <div>New to Streamada?</div>

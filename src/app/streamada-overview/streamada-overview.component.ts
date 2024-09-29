@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { logoutService } from '../services/logout.service';
+import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
   selector: 'app-streamada-overview',
@@ -17,7 +19,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   selectedVideo: any = null;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public authservice: AuthServiceService) {}
 
   ngAfterViewInit() {
     if (this.backgroundVideoRef?.nativeElement) {
@@ -111,6 +113,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
   ];
 
   logoutUser() {
+    this.authservice.removeToken();
     this.router.navigate(['landingpage']);
   }
 

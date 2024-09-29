@@ -4,25 +4,45 @@ import {
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
+  HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { catchError } from 'rxjs/operators';
+import { AuthServiceService } from './auth-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthInterceptorService implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const csrfToken = this.getCookie('csrftoken');
-    if (csrfToken && !req.headers.has('X-CSRFToken')) {
-      req = req.clone({
-        headers: req.headers.set('X-CSRFToken', csrfToken),
-      });
-    }
-    return next.handle(req);
-  }
 
-  private getCookie(name: string): string | null {
-    const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return match ? decodeURIComponent(match[2]) : null;
+export class AuthInterceptorService implements HttpInterceptor {
+
+  constructor(private authService: AuthServiceService, private router: Router){}
+  
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+    const openEndpoints = ['/api/login/', '/api/register/'];
+
+    const isOpenEndpoint = openEndpoints.some(url => req.url.includes(url));
+
+    if (!isOpenEndpoint) {
+      const authToken = this.authService.getToken();
+      if (authToken) {
+        req = req.clone({
+          setHeaders: {
+            Authorization: `Token ${authToken}`
+          }
+        });
+      }
+    }
+
+    return next.handle(req).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          this.authService.logout();
+        }
+        return throwError(error);
+      })
+    );
   }
 }

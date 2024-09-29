@@ -8,6 +8,7 @@ import { StreamadaOverviewComponent } from './streamada-overview/streamada-overv
 import { MediaplayerComponent } from './mediaplayer/mediaplayer.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ImprintComponent } from './imprint/imprint.component';
+import { AuthGuard } from './auth.guard';
 
 
 export const routes: Routes = [
@@ -18,7 +19,7 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent},
     { path: 'forget-password', component: ForgetPasswordComponent},
     { path: 'reset-password', component: ResetPasswordComponent},
-    { path: 'streamada-overview', component: StreamadaOverviewComponent},
+    { path: 'streamada-overview', component: StreamadaOverviewComponent, canActivate: [AuthGuard]},
     { path: 'mediaplayer', component: MediaplayerComponent},
     { path: 'privacypolicy', component: PrivacyPolicyComponent},
     { path: 'imprint', component: ImprintComponent},
