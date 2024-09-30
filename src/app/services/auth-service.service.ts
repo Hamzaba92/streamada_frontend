@@ -16,7 +16,9 @@ export class AuthServiceService {
 
   loggedIn$ = this.loggedIn.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    this.loggedIn.next(this.hasToken());
+  }
 
   setToken(token: string): void {
     localStorage.setItem(this.authTokenKey, token);
@@ -36,8 +38,7 @@ export class AuthServiceService {
   }
 
   isLoggedIn(): boolean {
-    const status = this.loggedIn.value;
-    return status;
+    return this.hasToken();
   }
 
   logout(): void {
