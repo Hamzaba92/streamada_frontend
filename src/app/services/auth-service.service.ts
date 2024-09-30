@@ -7,8 +7,12 @@ import { Router } from '@angular/router';
 })
 export class AuthServiceService {
 
-  private authTokenKey = 'auth_token';
+  
   private loggedIn = new BehaviorSubject<boolean>(this.hasToken());
+
+  private firstNameKey = 'first_name';
+  private lastNameKey = 'last_name';
+  private authTokenKey = 'auth_token';
 
   loggedIn$ = this.loggedIn.asObservable();
 
@@ -21,6 +25,8 @@ export class AuthServiceService {
 
   removeToken(): void {
     localStorage.removeItem(this.authTokenKey);
+    localStorage.removeItem(this.firstNameKey);
+    localStorage.removeItem(this.lastNameKey);
     this.loggedIn.next(false);
   }
 
@@ -42,6 +48,19 @@ export class AuthServiceService {
   hasToken(): boolean {
     const has = !!this.getToken();
     return has;
+  }
+
+  setUserDetails(firstName: string, lastName: string): void {
+    localStorage.setItem(this.firstNameKey, firstName);
+    localStorage.setItem(this.lastNameKey, lastName);
+  }
+
+  getUserFirstName() {
+    return localStorage.getItem(this.firstNameKey);
+  }
+
+  getUserLastName() {
+    return localStorage.getItem(this.lastNameKey);
   }
 
 }

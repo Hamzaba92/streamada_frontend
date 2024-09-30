@@ -17,8 +17,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
 
-
-
   login(credentials: LoginData): Observable<LoginResponse> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'

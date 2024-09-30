@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmNewPasswordService } from '../services/confirm-new-password.service';
 
 
 
@@ -19,7 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ResetPasswordComponent {
 
-  constructor(private router: Router, private route: ActivatedRoute){}
+  constructor(private router: Router, private route: ActivatedRoute, private confirmNewPassword: ConfirmNewPasswordService) { }
 
   resetPassword: string = '';
   confirmPassword: string = '';
@@ -32,12 +32,12 @@ export class ResetPasswordComponent {
   uid: string = '';
   token: string = '';
 
+
   ngOnInit(): void {
-    // Abrufen von `uid` und `token` aus der URL
     this.uid = this.route.snapshot.paramMap.get('uid') || '';
     this.token = this.route.snapshot.paramMap.get('token') || '';
   }
-  
+
   togglePasswordVisibility(type: string): void {
     if (type === 'password') {
       this.hidePassword = !this.hidePassword;
@@ -50,25 +50,40 @@ export class ResetPasswordComponent {
     return this.resetPassword === this.confirmPassword;
   }
 
-  goToLoginComp(){
+  goToLoginComp() {
     this.router.navigate(['login']);
   }
 
-  closePopup(){
+  closePopup() {
     this.showpopup = false;
     location.reload();
   }
 
+  playFeedbackAudio(){
+    let audio = new Audio('assets/audio/reset_pw_feedback.mp3');
+    audio.play();
+  }
+
   onSubmit() {
     if (!this.doPasswordsMatch()) {
-      //server-antwort rein rendern!
-    } else {
-      console.log('Form submitted successfully');
-      this.loading = true; 
-      setTimeout(() => {
-        this.loading = false;
-        this.showpopup = true;
-      }, 4000);
+      console.log('passwords do not match');
+      return;
     }
+    this.loading = true;
+    this.confirmNewPassword.resetPassword(this.uid, this.token, this.resetPassword)
+      .subscribe(
+        response => {
+          this.loading = false;
+          this.playFeedbackAudio();
+          this.showpopup = true;
+        },
+        error => {
+          console.error('Error resetting password', error);
+          this.loading = false;
+        }
+      )
+
   }
+
 }
+

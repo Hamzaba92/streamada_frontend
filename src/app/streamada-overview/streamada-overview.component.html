@@ -11,10 +11,16 @@
             </svg>
         </a>
     </div>
-    <button type="button" class="btn btn-outline-danger" (click)="logoutUser()">
-        <span class="material-symbols-outlined">logout</span>Log Out
-    </button>
-
+    <div class="dropdown" [class.show]="dropdownOpen">
+        <button class="btn btn-outline-danger dropdown-toggle" type="button" (click)="toggleDropdown()">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+        <div class="dropdown-menu" [class.show]="dropdownOpen">
+            <button class="dropdown-item" (click)="logoutUser()">
+                {{ authservice.getUserFirstName() }} {{ authservice.getUserLastName() }} <span class="material-symbols-outlined">mode_off_on</span>
+            </button>
+        </div>
+    </div>
 </nav>
 
 <main class="streamada-overview-overcontainer">
@@ -107,4 +113,3 @@
 
 
 </main>
-

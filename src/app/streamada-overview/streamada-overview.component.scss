@@ -22,6 +22,7 @@
     flex-shrink: 0;
     align-items: center;
     display: flex;
+    justify-content: space-around;
 
     &:hover {
       background-color: $net_red;
@@ -357,4 +358,23 @@ header.video-playing-loop-atf {
       color: $net_red;
     }
   }
+}
+
+.dropdown-menu {
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown.show .dropdown-menu {
+  position: absolute;
+  right: 30px;
+  top: 100%;
+  margin-top: 3px;
+  background-color: $net_red;
+}
+
+.dropdown-item  {
+  cursor: pointer;
+  color: $net_backgr;
+  z-index: 1000;
 }

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { logoutService } from '../services/logout.service';
 import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
@@ -19,7 +18,14 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   selectedVideo: any = null;
 
-  constructor(private router: Router, public authservice: AuthServiceService) {}
+  dropdownOpen = false;
+
+
+  constructor(private router: Router, public authservice: AuthServiceService) { }
+
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
   ngAfterViewInit() {
     if (this.backgroundVideoRef?.nativeElement) {

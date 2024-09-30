@@ -32,6 +32,11 @@ export class ForgetPasswordComponent {
     this.email = '';
   }
 
+  playEmailSentAudio(){
+    let audio = new Audio('assets/audio/email_send_wish.wav');
+    audio.play();
+  }
+
 
   onSubmit() {
     if (this.email) {
@@ -41,6 +46,7 @@ export class ForgetPasswordComponent {
       this.passwortResetService.sendPasswordResetEmail(this.email).subscribe(
         response => {
           this.loading = false;
+          this.playEmailSentAudio();
           this.showpopup = true;
 
         },

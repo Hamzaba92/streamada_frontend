@@ -86,6 +86,8 @@ export class LoginComponent {
           this.loading = false;
           this.successMessage = response.message;
           this.authService.setToken(response.token);
+          this.authService.setUserDetails(response.first_name, response.last_name);
+
           this.showpopup = true;
           this.loginEnterSound();
           

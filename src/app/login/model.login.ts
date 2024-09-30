@@ -6,4 +6,6 @@ export interface LoginData {
   export interface LoginResponse {
     token: string;
     message: string;
+    first_name: string;
+    last_name: string;
   }
