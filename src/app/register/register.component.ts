@@ -110,6 +110,11 @@ export class RegisterComponent {
     location.reload();
   }
 
+  SendEmailSound(){
+    let audio = new Audio('./assets/audio/email_send_wish.wav');
+    audio.play();
+  }
+
   onSubmit() {
     if (this.registerForm.valid) {
 
@@ -127,6 +132,7 @@ export class RegisterComponent {
         (response: RegisterResponse) => {
           console.log('user successfully registered', response);
           this.loading = false;
+          this.SendEmailSound();
           this.showPopup = true;
         },
         error => {
