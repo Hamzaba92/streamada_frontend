@@ -15,7 +15,7 @@ export class MediaplayerComponent {
 
 
 
-  currentVideoSrc: string = 'assets/videos/test_video.mp4';
+  currentVideoSrc: string = 'assets/videos/genre_abstract_dna_rose.mp4';
 
   backToOverview() {
     this.router.navigate(['streamada-overview']);

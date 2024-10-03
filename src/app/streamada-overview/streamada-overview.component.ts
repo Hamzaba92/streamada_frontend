@@ -14,7 +14,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('backgroundVideo') backgroundVideoRef: ElementRef<HTMLVideoElement> | undefined;
 
-  currentVideoSrc: string = 'assets/videos/test_video.mp4';
+  currentVideoSrc: string = 'assets/videos/genre_abstract_dna_rose.mp4';
 
   selectedVideo: any = null;
 
@@ -83,21 +83,21 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
   videos = [
     {
       title: 'An unbelievable adventure trough the Canyons',
-      src: 'assets/videos/test_video.mp4',
+      src: 'assets/videos/genre_abstract_dna_rose.mp4',
       thumbnail: 'assets/videos/test_video_thumbnail.png',
       description: 'Ein aufregendes Abenteuer durch die Wüste.',
       genre: 'Abenteuer'
     },
     {
       title: 'Ninja-Turtel under the sea',
-      src: 'assets/videos/test2.mp4',
+      src: 'assets/videos/genre_newonstreamada_turtle.mp4',
       thumbnail: 'assets/videos/thumbnail.jpg',
       description: 'Eine Reise mit einer Schildkröte.',
       genre: 'Dokumentation'
     },
     {
       title: 'Cowboy escape from the Indians',
-      src: 'assets/videos/cowboy_test.mp4',
+      src: 'assets/videos/genre_abstract_dna_rose.mp4',
       thumbnail: 'assets/videos/cowboy_thumbnail.png',
       description: 'Common tThe procharacters who e and rugged idividualism',
       genre: 'Western'

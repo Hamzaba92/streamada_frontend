@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { StartAnimationComponent } from './start-animation/start-animation.component';
 import { StartAnimationService } from './services/start-animation.service';
@@ -18,10 +18,15 @@ import { filter, first } from 'rxjs/operators';
 })
 export class AppComponent {
   title = 'streamada';
-  constructor(public startAnimationService: StartAnimationService, private router: Router){}
+  showAnimation: boolean = false;
+
+  constructor(
+    public startAnimationService: StartAnimationService, 
+    private router: Router, 
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-    
     this.router.events
       .pipe(
         filter((event: any) => event instanceof NavigationEnd),
@@ -33,9 +38,12 @@ export class AppComponent {
   
         if (!excludedRoutes.includes(urlPath)) {
           this.startAnimationService.showAnimation();
+          this.showAnimation = true;
         } else {
           this.startAnimationService.hideAnimation();
+          this.showAnimation = false; 
         }
+        this.cdr.detectChanges(); 
       });
   }
   

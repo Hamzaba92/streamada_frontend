@@ -61,11 +61,11 @@
     z-index: 3;
   
     // Genre-Container spezifisch für jedes Genre
-    .documentary-genre,
-    .adventure-genre,
+    .sport-genre,
+    .explore-genre,
     .western-genre,
-    .romance-genre,
-    .my-list-genre {
+    .crime-genre,
+    .abstract-genre {
       width: 100%;
       display: flex;
       flex-direction: column; 
