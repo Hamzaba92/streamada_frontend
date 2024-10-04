@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthServiceService } from '../services/auth-service.service';
+import { Video, VideoService } from '../services/video.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-streamada-overview',
@@ -10,18 +12,28 @@ import { AuthServiceService } from '../services/auth-service.service';
   templateUrl: './streamada-overview.component.html',
   styleUrls: ['./streamada-overview.component.scss']
 })
-export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
+export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnInit {
 
   @ViewChild('backgroundVideo') backgroundVideoRef: ElementRef<HTMLVideoElement> | undefined;
 
-  currentVideoSrc: string = 'assets/videos/genre_abstract_dna_rose.mp4';
-
-  selectedVideo: any = null;
-
+  currentVideoSrc: string = '';
+  selectedVideo: Video | null = null;
   dropdownOpen = false;
+  genres: string[] = [];
+  videos: Video[] = [];
+  videosByGenre: { [key: string]: Video[] } = {};
+  private videoSubscription: Subscription | undefined;
 
 
-  constructor(private router: Router, public authservice: AuthServiceService) { }
+  constructor(
+    private router: Router,
+    public authservice: AuthServiceService,
+    private videoService: VideoService
+  ) { }
+
+  ngOnInit() {
+    this.loadVideos();
+  }
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -35,36 +47,39 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.backgroundVideoRef?.nativeElement) {
-      const backgroundVideo = this.backgroundVideoRef.nativeElement;
-      backgroundVideo.removeEventListener('error', this.handleVideoError);
+    if (this.videoSubscription) {
+      this.videoSubscription.unsubscribe();
     }
   }
 
-  playPreview(event: Event, videoSrc: string): void {
-    event.stopPropagation();
-    this.selectedVideo = videoSrc;
-    this.currentVideoSrc = videoSrc;
-  }
-
-
-  playVideo(event: Event, videoSrc: string): void {
+  updateBackgroundVideo() {
     if (!this.backgroundVideoRef?.nativeElement) {
       console.error('Background video element not found');
       return;
     }
 
     const backgroundVideo = this.backgroundVideoRef.nativeElement;
-
-    try {
-      this.currentVideoSrc = videoSrc;
-      backgroundVideo.src = videoSrc;
-      backgroundVideo.load();
-      backgroundVideo.addEventListener('canplay', this.handleCanPlay, { once: true });
-    } catch (error) {
-      console.error('Error loading video:', error);
-    }
+    backgroundVideo.src = this.currentVideoSrc;
+    backgroundVideo.load();
+    backgroundVideo.play().catch(error => {
+      console.error('Error playing video:', error);
+    });
   }
+
+    playPreview(event: Event, video: Video): void {
+      event.stopPropagation();
+      this.selectedVideo = video;
+      this.currentVideoSrc = video.video_1080p_url;
+      this.updateBackgroundVideo();
+    }
+
+    playVideo(event: Event, video: Video): void {
+      event.stopPropagation();
+      this.selectedVideo = video;
+      this.currentVideoSrc = video.video_1080p_url; 
+      this.updateBackgroundVideo();
+    }
+
 
   handleCanPlay = (event: Event) => {
     const video = event.target as HTMLVideoElement;
@@ -80,43 +95,33 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
     console.error('Video failed to load:', event);
   }
 
-  videos = [
-    {
-      title: 'An unbelievable adventure trough the Canyons',
-      src: 'assets/videos/genre_abstract_dna_rose.mp4',
-      thumbnail: 'assets/videos/test_video_thumbnail.png',
-      description: 'Ein aufregendes Abenteuer durch die Wüste.',
-      genre: 'Abenteuer'
-    },
-    {
-      title: 'Ninja-Turtel under the sea',
-      src: 'assets/videos/genre_newonstreamada_turtle.mp4',
-      thumbnail: 'assets/videos/thumbnail.jpg',
-      description: 'Eine Reise mit einer Schildkröte.',
-      genre: 'Dokumentation'
-    },
-    {
-      title: 'Cowboy escape from the Indians',
-      src: 'assets/videos/genre_abstract_dna_rose.mp4',
-      thumbnail: 'assets/videos/cowboy_thumbnail.png',
-      description: 'Common tThe procharacters who e and rugged idividualism',
-      genre: 'Western'
-    },
-    {
-      title: 'HongKong the futuristic city of Asia',
-      src: 'assets/videos/hongkong_test.mp4',
-      thumbnail: 'assets/videos/hongkong_thumbnail.png',
-      description: 'Common tThe procharacters who e and rugged idividualism',
-      genre: 'Adventure'
-    },
-    {
-      title: 'Soccer - Messis wonderkid',
-      src: 'assets/videos/soccer_test.mp4',
-      thumbnail: 'assets/videos/soccer_thumbnail.png',
-      description: 'Common tThe procharacters who e and rugged idividualism',
-      genre: 'Sport'
-    }
-  ];
+  loadVideos() {
+    this.videoSubscription = this.videoService.getVideos().subscribe(
+      (data: Video[]) => {
+        this.videos = data;
+        this.groupVideosByGenre();
+        if (this.videos.length > 0) {
+          this.currentVideoSrc = this.videos[0].video_1080p_url;
+        }
+      },
+      (error) => {
+        console.error('error loading video:', error);
+      }
+    );
+  }
+
+  groupVideosByGenre() {
+    this.videosByGenre = {};
+    this.genres = [];
+
+    this.videos.forEach(video => {
+      if (!this.videosByGenre[video.genre]) {
+        this.videosByGenre[video.genre] = [];
+        this.genres.push(video.genre);
+      }
+      this.videosByGenre[video.genre].push(video);
+    });
+  }
 
   logoutUser() {
     this.authservice.removeToken();
@@ -140,6 +145,5 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy {
   }
 
 
-  items = [1, 2, 3, 4, 5];
 
 }

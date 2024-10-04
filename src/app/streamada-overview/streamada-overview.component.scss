@@ -2,9 +2,8 @@
 @import './../../styles.scss';
 @import 'mediaquerys.scss';
 
-
 .navbar {
-  background-color: rgba($color: #000000, $alpha: 0.88);
+  background-color: rgba(#000000, 0.88);
   margin: 0;
   padding: 0;
   display: flex;
@@ -49,7 +48,6 @@
   color: white;
   z-index: 2;
 
-
   &::before {
     content: '';
     position: absolute;
@@ -88,21 +86,18 @@ header.video-playing-loop-atf {
   z-index: 10;
   display: flex;
   justify-content: center;
-  align-items: self-start;
+  align-items: flex-start;
   flex-direction: column;
   gap: 10px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 20px;
   background: rgba(0, 0, 0, 0.7);
   overflow-x: auto;
   overflow: visible;
-  scrollbar-width: none;
-  /*for Firefox*/
-  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE und Edge */
 
-  /* IE and Edge */
   &::-webkit-scrollbar {
-    display: none;
-    /* Chrome, Safari und Opera */
+    display: none; /* Chrome, Safari und Opera */
   }
 
   .title-container {
@@ -127,7 +122,9 @@ header.video-playing-loop-atf {
   }
 }
 
-.video-container {
+/* Gemeinsame Stile für Video-Container */
+.video-container,
+.items-container {
   position: relative;
   overflow: visible;
   display: flex;
@@ -136,22 +133,20 @@ header.video-playing-loop-atf {
   flex-wrap: nowrap;
   scrollbar-width: none;
   overflow-x: auto;
-  /* Für Firefox */
   -ms-overflow-style: none;
-  /* Für Internet Explorer und Edge */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
-.video-container::-webkit-scrollbar {
-  display: none;
-  /* Für Chrome, Safari und Opera */
-}
-
-.video-item {
+/* Gemeinsame Stile für Video-Items */
+.video-item,
+.genre-item {
   position: relative;
   cursor: pointer;
   color: white;
   text-align: center;
-  transition: transform 0.3s ease;
   flex: 0 0 auto;
   overflow: visible;
 
@@ -159,10 +154,11 @@ header.video-playing-loop-atf {
     width: 100%;
     max-width: 200px;
     border-radius: 10px;
-    transition: width 0.3s ease;
+    transition: transform 0.3s ease;
   }
 }
 
+/* Hover-Dialog für Video-Items */
 .hover-dialog {
   position: absolute;
   bottom: 0;
@@ -175,12 +171,7 @@ header.video-playing-loop-atf {
   visibility: hidden;
   opacity: 0;
   z-index: 999;
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-
-  .hover-preview {
-    width: 100%;
-    border-radius: 10px;
-  }
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 
   h4 {
     color: white;
@@ -202,7 +193,7 @@ header.video-playing-loop-atf {
       width: 38px;
       height: 38px;
       font-size: 38px;
-      padding: 5px 5px 10px 10px;
+      padding: 5px 6px 10px 10px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -229,22 +220,21 @@ header.video-playing-loop-atf {
   }
 }
 
-.video-item:hover {
-  .hover-dialog {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-    cursor: default;
-  }
+/* Hover-Effekt für Video-Items */
+.video-item:hover .hover-dialog,
+.genre-item:hover .hover-dialog {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  cursor: default;
 }
 
-.video-item:hover {
-  .play-button {
-    pointer-events: auto;
-  }
+.video-item:hover .play-button,
+.genre-item:hover .play-button {
+  pointer-events: auto;
 }
 
-//Video-Info--Preview
+/* Video-Info--Preview */
 .video-info {
   position: absolute;
   top: 5%;
@@ -280,10 +270,10 @@ header.video-playing-loop-atf {
   }
 }
 
-// Video-Genre Section - Horizontal Fields
+/* Video-Genre Section */
 .video-genre {
   display: flex;
-  flex-direction: column; // Die Genres vertikal anordnen
+  flex-direction: column; /* Genres vertikal anordnen */
   justify-content: flex-start;
   align-items: flex-start;
   gap: 25px;
@@ -291,12 +281,7 @@ header.video-playing-loop-atf {
   background-color: rgba(0, 0, 0, 0.7);
   z-index: 3;
 
-  // Genre-Container spezifisch für jedes Genre
-  .sport-genre,
-  .explore-genre,
-  .western-genre,
-  .crime-genre,
-  .abstract-genre {
+  .genre-section {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -313,30 +298,9 @@ header.video-playing-loop-atf {
       padding-left: 10px;
     }
 
+    /* Die items-container verwendet die gleichen Stile wie video-container */
     .items-container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      flex-wrap: wrap;
-      width: 100%;
-      padding-left: 10px;
-    }
-
-    .genre-item {
-      width: 200px;
-      height: 112.5px;
-      background-color: rgba(54, 51, 51, 0.3);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      border-radius: 10px;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-
-      &:hover {
-        transform: scale(1.05);
-        background-color: rgba(255, 255, 255, 0.3);
-      }
+      @extend .video-container;
     }
   }
 }
@@ -373,7 +337,7 @@ header.video-playing-loop-atf {
   background-color: $net_red;
 }
 
-.dropdown-item  {
+.dropdown-item {
   cursor: pointer;
   color: $net_backgr;
   z-index: 1000;

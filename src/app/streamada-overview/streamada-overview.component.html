@@ -35,75 +35,54 @@
                 <h2>New on <b>Streamada</b></h2>
                 <img src="./../../assets/horizontal_scroll1.png" alt="scroll icon" class="title-icon">
             </div>
-            <div class="video-container">
-                <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video.src)">
-                    <img [src]="video.thumbnail" [alt]="video.title" class="thumbnail">
 
-                    <div class="hover-dialog" (click)="onHoverDialogClick($event)">
-                        <h4>{{ video.title }}</h4>
-                        <div class="play-button">
-                            <button (click)="openMediaPlayer()">&blacktriangleright;</button>
-                            <button (click)="playPreview($event, video.src)" type="button"
-                                class="btn btn-outline-danger">Preview</button>
-                        </div>
+            <div class="video-container">
+                <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video)">
+                  <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
+              
+                  <div class="hover-dialog" (click)="onHoverDialogClick($event)">
+                    <h4>{{ video.title }}</h4>
+                    <div class="play-button">
+                      <button (click)="openMediaPlayer()">&blacktriangleright;</button>
+                      <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
                     </div>
+                  </div>
                 </div>
-            </div>
+              </div> 
+
         </section>
     </header>
 
     <section *ngIf="selectedVideo" class="video-info">
-        <h1>Lorem ipsum</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit similique, ad rem ullam temporibus
-            sunt. Modi cupiditate molestiae sint magni, aperiam delectus sunt quos, explicabo cum facere deleniti optio
-            sapiente!</p>
-        <p><strong>Genre:</strong> Documentary</p>
+        <h1>{{ selectedVideo.title }}</h1>
+        <p>{{ selectedVideo.description }}</p>
+        <p><strong>Genre:</strong>{{ selectedVideo.genre }}</p>
         <button (click)="openMediaPlayer()" class="btn btn-primary">Play</button>
     </section>
 
 
     <section class="video-genre">
-        <!-- Documentry Genre -->
-        <div class="sport-genre">
-            <h2>Sport</h2>
-            <div class="items-container">
-                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
+        <div *ngFor="let genre of genres" class="genre-section">
+          <h2>{{ genre }}</h2>
+          <div class="items-container">
+            <div
+              *ngFor="let video of videosByGenre[genre]"
+              class="genre-item"
+              (click)="playVideo($event, video)"
+            >
+              <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
+    
+              <div class="hover-dialog" (click)="onHoverDialogClick($event)">
+                <h4>{{ video.title }}</h4>
+                <div class="play-button">
+                  <button (click)="openMediaPlayer()">&blacktriangleright;</button>
+                  <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-
-        <!-- Adventure Genre -->
-        <div class="explore-genre">
-            <h2>Explore</h2>
-            <div class="items-container">
-                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
-            </div>
-        </div>
-
-        <!-- Western Genre -->
-        <div class="western-genre">
-            <h2>Western</h2>
-            <div class="items-container">
-                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
-            </div>
-        </div>
-
-        <!-- Romance Genre -->
-        <div class="crime-genre">
-            <h2>Crime</h2>
-            <div class="items-container">
-                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
-            </div>
-        </div>
-
-        <!-- My List Genre -->
-        <div class="abstract-genre">
-            <h2>Abstract</h2>
-            <div class="items-container">
-                <div *ngFor="let item of items" class="genre-item">{{ item }}</div>
-            </div>
-        </div>
-    </section>
-
+      </section>
 
     <section class="pp-imprint">
         <div (click)="openPrivacyPolicy()">PrivacyPolicy</div>
