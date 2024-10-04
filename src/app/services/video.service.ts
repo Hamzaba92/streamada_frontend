@@ -13,6 +13,7 @@ export interface Video {
   video_720p_url: string;
   video_1080p_url: string;
   thumbnail_url: string;
+  add_to_new_video_feed: boolean;
 }
 
 @Injectable({
@@ -22,11 +23,21 @@ export class VideoService {
 
   constructor(private http: HttpClient) { }
 
+  private selectedVideo: any;
+
   private apiUrl = `${environment.apiUrl}/api/videos/`;
 
-  
+
   getVideos(): Observable<Video[]> {
     return this.http.get<Video[]>(this.apiUrl);
+  }
+
+  setSelectedVideo(video: any): void {
+    this.selectedVideo = video;
+  }
+
+  getSelectedVideo(): any {
+    return this.selectedVideo;
   }
 
 }

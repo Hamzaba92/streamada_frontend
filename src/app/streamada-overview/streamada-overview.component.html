@@ -1,94 +1,92 @@
 <nav class="navbar">
-    <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand">
-            <svg viewBox="0 0 1000 200" width="190px" height="50px">
-                <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
-                <text fill="#E50914" font-size="120" font-weight="bold" letter-spacing="25">
-                    <textPath href="#curved-path" startOffset="0%">
-                        STREAMADA
-                    </textPath>
-                </text>
-            </svg>
-        </a>
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand">
+      <svg viewBox="0 0 1000 200" width="190px" height="50px">
+        <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
+        <text fill="#E50914" font-size="120" font-weight="bold" letter-spacing="25">
+          <textPath href="#curved-path" startOffset="0%">
+            STREAMADA
+          </textPath>
+        </text>
+      </svg>
+    </a>
+  </div>
+  <div class="dropdown" [class.show]="dropdownOpen">
+    <button class="btn btn-outline-danger dropdown-toggle" type="button" (click)="toggleDropdown()">
+      <span class="material-symbols-outlined">logout</span>
+    </button>
+    <div class="dropdown-menu" [class.show]="dropdownOpen">
+      <button class="dropdown-item" (click)="logoutUser()">
+        {{ authservice.getUserFirstName() }} {{ authservice.getUserLastName() }} <span
+          class="material-symbols-outlined">mode_off_on</span>
+      </button>
     </div>
-    <div class="dropdown" [class.show]="dropdownOpen">
-        <button class="btn btn-outline-danger dropdown-toggle" type="button" (click)="toggleDropdown()">
-            <span class="material-symbols-outlined">logout</span>
-        </button>
-        <div class="dropdown-menu" [class.show]="dropdownOpen">
-            <button class="dropdown-item" (click)="logoutUser()">
-                {{ authservice.getUserFirstName() }} {{ authservice.getUserLastName() }} <span class="material-symbols-outlined">mode_off_on</span>
-            </button>
-        </div>
-    </div>
+  </div>
 </nav>
 
 <main class="streamada-overview-overcontainer">
 
-    <header class="video-playing-loop-atf">
-        <video #backgroundVideo [src]="currentVideoSrc" type="video/mp4" autoplay loop muted class="background-video">
-            Your browser does not support the video tag.
-        </video>
+  <header class="video-playing-loop-atf">
+    <video #backgroundVideo [src]="currentVideoSrc" type="video/mp4" autoplay loop muted class="background-video">
+      Your browser does not support the video tag.
+    </video>
 
-        <section class="new-on-streamada">
-            <div class="title-container">
-                <h2>New on <b>Streamada</b></h2>
-                <img src="./../../assets/horizontal_scroll1.png" alt="scroll icon" class="title-icon">
-            </div>
+    <section class="new-on-streamada">
+      <div class="title-container">
+        <h2>New on <b>Streamada</b></h2>
+        <img src="./../../assets/horizontal_scroll1.png" alt="scroll icon" class="title-icon">
+      </div>
 
-            <div class="video-container">
-                <div class="video-item" *ngFor="let video of videos" (click)="playVideo($event, video)">
-                  <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
-              
-                  <div class="hover-dialog" (click)="onHoverDialogClick($event)">
-                    <h4>{{ video.title }}</h4>
-                    <div class="play-button">
-                      <button (click)="openMediaPlayer()">&blacktriangleright;</button>
-                      <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
-                    </div>
-                  </div>
-                </div>
-              </div> 
+      <div class="video-container">
+        <div class="video-item" *ngFor="let video of videosByGenre['New to Streamada']"
+          (click)="playVideo($event, video)">
+          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
 
-        </section>
-    </header>
-
-    <section *ngIf="selectedVideo" class="video-info">
-        <h1>{{ selectedVideo.title }}</h1>
-        <p>{{ selectedVideo.description }}</p>
-        <p><strong>Genre:</strong>{{ selectedVideo.genre }}</p>
-        <button (click)="openMediaPlayer()" class="btn btn-primary">Play</button>
-    </section>
-
-
-    <section class="video-genre">
-        <div *ngFor="let genre of genres" class="genre-section">
-          <h2>{{ genre }}</h2>
-          <div class="items-container">
-            <div
-              *ngFor="let video of videosByGenre[genre]"
-              class="genre-item"
-              (click)="playVideo($event, video)"
-            >
-              <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
-    
-              <div class="hover-dialog" (click)="onHoverDialogClick($event)">
-                <h4>{{ video.title }}</h4>
-                <div class="play-button">
-                  <button (click)="openMediaPlayer()">&blacktriangleright;</button>
-                  <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
-                </div>
-              </div>
+          <div class="hover-dialog" (click)="onHoverDialogClick($event)">
+            <h4>{{ video.title }}</h4>
+            <div class="play-button">
+              <button (click)="openMediaPlayer($event, video)">&blacktriangleright;</button>
+              <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-    <section class="pp-imprint">
-        <div (click)="openPrivacyPolicy()">PrivacyPolicy</div>
-        <span>© Streamada 2024</span>
-        <div (click)="openImprint()">Imprint</div>
     </section>
+  </header>
+
+  <section *ngIf="selectedVideo" class="video-info">
+    <h1>{{ selectedVideo.title }}</h1>
+    <p>{{ selectedVideo.description }}</p>
+    <p><strong>Genre:</strong>{{ selectedVideo.genre }}</p>
+    <button (click)="openMediaPlayer($event, selectedVideo)" class="btn btn-primary">Play</button>
+  </section>
+
+
+  <section class="video-genre">
+    <div *ngFor="let genre of genres" class="genre-section">
+      <h2>{{ genre }}</h2>
+      <div class="items-container">
+        <div *ngFor="let video of videosByGenre[genre]" class="genre-item" (click)="playVideo($event, video)">
+          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
+
+          <div class="hover-dialog" (click)="onHoverDialogClick($event)">
+            <h4>{{ video.title }}</h4>
+            <div class="play-button">
+              <button (click)="openMediaPlayer($event, video)">&blacktriangleright;</button>
+              <button (click)="playPreview($event, video)" type="button" class="btn btn-outline-danger">Preview</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pp-imprint">
+    <div (click)="openPrivacyPolicy()">PrivacyPolicy</div>
+    <span>© Streamada 2024</span>
+    <div (click)="openImprint()">Imprint</div>
+  </section>
 
 
 </main>

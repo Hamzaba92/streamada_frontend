@@ -17,13 +17,9 @@
 </nav>
 
 <main class="overcontainer-mediaplayer">
-
-
-
     <div class="media-container">
 
-        <h1>Title-Variable</h1>
-        <!-- dropdown-menu -->
+        <h1>{{ video?.title || 'Title-Variable' }}</h1>
         <div class="row">
             <div class="col">
                 <div ngbDropdown class="d-inline-block">
@@ -31,9 +27,9 @@
                         Select Quality
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem>480p SD</button>
-                        <button ngbDropdownItem>720p HD</button>
-                        <button ngbDropdownItem>1080p Full HD</button>
+                        <button ngbDropdownItem (click)="selectQuality('480p')">480p SD</button>
+                        <button ngbDropdownItem (click)="selectQuality('720p')">720p HD</button>
+                        <button ngbDropdownItem (click)="selectQuality('1080p')">1080p Full HD</button>
                     </div>
                 </div>
             </div>

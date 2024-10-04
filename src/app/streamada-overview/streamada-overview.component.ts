@@ -23,8 +23,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
   videos: Video[] = [];
   videosByGenre: { [key: string]: Video[] } = {};
   private videoSubscription: Subscription | undefined;
-
-
+ 
   constructor(
     private router: Router,
     public authservice: AuthServiceService,
@@ -39,61 +38,49 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
     this.dropdownOpen = !this.dropdownOpen;
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
+    if (this.backgroundVideoRef) {
+      this.playBackgroundVideo(this.videos.length > 0 ? this.videos[0].video_1080p_url : null);
+    }
+  }
+
+  ngOnDestroy(): void {
     if (this.backgroundVideoRef?.nativeElement) {
-      const backgroundVideo = this.backgroundVideoRef.nativeElement;
-      backgroundVideo.addEventListener('error', this.handleVideoError);
+      const videoElement = this.backgroundVideoRef.nativeElement;
+      videoElement.pause();
+      videoElement.src = '';
     }
   }
 
-  ngOnDestroy() {
-    if (this.videoSubscription) {
-      this.videoSubscription.unsubscribe();
+  playBackgroundVideo(src: string | null = null): void {
+    if (this.backgroundVideoRef) {
+      const videoElement = this.backgroundVideoRef.nativeElement;
+      videoElement.pause();
+      videoElement.src = src || this.currentVideoSrc;
+      videoElement.load(); 
+      videoElement.oncanplay = () => {
+        videoElement.play().catch(error => {
+          console.error('Error playing video:', error);
+        });
+      };
     }
   }
-
+  
   updateBackgroundVideo() {
-    if (!this.backgroundVideoRef?.nativeElement) {
-      console.error('Background video element not found');
-      return;
-    }
-
-    const backgroundVideo = this.backgroundVideoRef.nativeElement;
-    backgroundVideo.src = this.currentVideoSrc;
-    backgroundVideo.load();
-    backgroundVideo.play().catch(error => {
-      console.error('Error playing video:', error);
-    });
+    this.playBackgroundVideo(this.currentVideoSrc);
   }
 
-    playPreview(event: Event, video: Video): void {
-      event.stopPropagation();
-      this.selectedVideo = video;
-      this.currentVideoSrc = video.video_1080p_url;
-      this.updateBackgroundVideo();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    playVideo(event: Event, video: Video): void {
-      event.stopPropagation();
-      this.selectedVideo = video;
-      this.currentVideoSrc = video.video_1080p_url; 
-      this.updateBackgroundVideo();
-    }
-
-
-  handleCanPlay = (event: Event) => {
-    const video = event.target as HTMLVideoElement;
-
-    if (video) {
-      video.play().catch(error => {
-        console.error('Error playing video:', error);
-      });
-    }
+  playPreview(event: Event, video: Video): void {
+    event.stopPropagation();
+    this.selectedVideo = video;
+    this.currentVideoSrc = video.video_1080p_url;
+    this.updateBackgroundVideo();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  handleVideoError(event: Event) {
-    console.error('Video failed to load:', event);
+  playVideo(event: Event, video: Video): void {
+    event.stopPropagation();
+    this.videoService.setSelectedVideo(video);
   }
 
   loadVideos() {
@@ -114,6 +101,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
   groupVideosByGenre() {
     this.videosByGenre = {};
     this.genres = [];
+    this.videosByGenre['New to Streamada'] = [];
 
     this.videos.forEach(video => {
       if (!this.videosByGenre[video.genre]) {
@@ -121,6 +109,10 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
         this.genres.push(video.genre);
       }
       this.videosByGenre[video.genre].push(video);
+
+      if (video.add_to_new_video_feed){
+        this.videosByGenre['New to Streamada'].push(video);
+      }
     });
   }
 
@@ -129,7 +121,10 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
     this.router.navigate(['landingpage']);
   }
 
-  openMediaPlayer() {
+  openMediaPlayer(event: Event, video: Video): void {
+    event.stopPropagation();
+    console.log('clicked', video);
+    this.videoService.setSelectedVideo(video);
     this.router.navigate(['mediaplayer']);
   }
 
@@ -144,7 +139,6 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
   onHoverDialogClick(event: Event) {
     event.stopPropagation();
   }
-
 
 
 }
