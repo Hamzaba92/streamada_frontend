@@ -71,6 +71,7 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
       this.selectedVideo = video;
       this.currentVideoSrc = video.video_1080p_url;
       this.updateBackgroundVideo();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     playVideo(event: Event, video: Video): void {
