@@ -17,8 +17,8 @@ import { AuthServiceService } from './auth-service.service';
 
 export class AuthInterceptorService implements HttpInterceptor {
 
-  constructor(private authService: AuthServiceService, private router: Router){}
-  
+  constructor(private authService: AuthServiceService, private router: Router) { }
+
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const openEndpoints = ['/api/login/', '/api/register/'];

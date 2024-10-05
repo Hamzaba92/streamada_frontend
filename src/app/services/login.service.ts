@@ -30,12 +30,11 @@ export class LoginService {
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Error occurred';
     if (error.error instanceof ErrorEvent) {
-      // Client-seitiger Fehler
       errorMessage = `Error: ${error.error.message}`;
     } else {
-      // Server-error
+      // server-error
       if (error.status === 400) {
-        
+
         if (error.error && typeof error.error === 'object') {
           const messages = [];
           for (const key in error.error) {

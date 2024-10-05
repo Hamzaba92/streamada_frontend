@@ -19,7 +19,6 @@ import { RegisterService } from '../services/register.service';
 import { RegisterData, RegisterResponse } from './register.model';
 
 
-/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -51,7 +50,7 @@ export class RegisterComponent {
 
 
   ngOnInit(): void {
-    this.email = this.emailService.getEmail(); //get the email-input from the landingpage
+    this.email = this.emailService.getEmail(); 
 
     this.registerForm = this.fb.group({
       firstName: ['', Validators.required],

@@ -20,7 +20,7 @@
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 590px) {
     .video-info {
         top: 1.8% !important;
         max-width: 50vw !important;
@@ -28,6 +28,13 @@
     }
 }
 
+@media (max-width: 550px) {
+    .video-info {
+        top: 1.8% !important;
+        max-width: 50vw !important;
+
+    }
+}
 
 @media (max-width: 508px) {
     .video-info {
@@ -93,7 +100,6 @@
         align-items: center;
       }
 
-  
       .genre-item {
         width: 200px;
         height: 112.5px;

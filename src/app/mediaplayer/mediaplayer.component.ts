@@ -41,7 +41,7 @@ export class MediaplayerComponent {
           this.currentVideoSrc = this.video.video_1080p_url;
           break;
         default:
-          this.currentVideoSrc = this.video.video_1080p_url; // default
+          this.currentVideoSrc = this.video.video_1080p_url; // default quality
           break;
       }
     }

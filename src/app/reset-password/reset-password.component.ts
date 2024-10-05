@@ -9,7 +9,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmNewPasswordService } from '../services/confirm-new-password.service';
 
 
-
 @Component({
   selector: 'app-reset-password',
   standalone: true,
@@ -31,7 +30,6 @@ export class ResetPasswordComponent {
   showpopup: boolean = false;
   uid: string = '';
   token: string = '';
-
 
   ngOnInit(): void {
     this.uid = this.route.snapshot.paramMap.get('uid') || '';
@@ -59,7 +57,7 @@ export class ResetPasswordComponent {
     location.reload();
   }
 
-  playFeedbackAudio(){
+  playFeedbackAudio() {
     let audio = new Audio('assets/audio/reset_pw_feedback.mp3');
     audio.play();
   }

@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './streamada-overview.component.html',
   styleUrls: ['./streamada-overview.component.scss']
 })
-export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnInit {
+export class StreamadaOverviewComponent implements  OnDestroy, OnInit {
 
   @ViewChild('backgroundVideo') backgroundVideoRef: ElementRef<HTMLVideoElement> | undefined;
 
@@ -36,12 +36,6 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
-  }
-
-  ngAfterViewInit(): void {
-    if (this.backgroundVideoRef) {
-      this.playBackgroundVideo(this.videos.length > 0 ? this.videos[0].video_1080p_url : null);
-    }
   }
 
   ngOnDestroy(): void {
@@ -90,6 +84,8 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
         this.groupVideosByGenre();
         if (this.videos.length > 0) {
           this.currentVideoSrc = this.videos[0].video_1080p_url;
+          this.selectedVideo = this.videos[0];
+          this.updateBackgroundVideo();
         }
       },
       (error) => {
@@ -123,7 +119,6 @@ export class StreamadaOverviewComponent implements AfterViewInit, OnDestroy, OnI
 
   openMediaPlayer(event: Event, video: Video): void {
     event.stopPropagation();
-    console.log('clicked', video);
     this.videoService.setSelectedVideo(video);
     this.router.navigate(['mediaplayer']);
   }

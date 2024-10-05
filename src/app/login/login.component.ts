@@ -17,7 +17,6 @@ import { LoginService } from '../services/login.service';
 import { AuthServiceService } from '../services/auth-service.service';
 import { LoginData, LoginResponse } from './model.login';
 
-/** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
@@ -34,16 +33,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 
 export class LoginComponent {
+
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   passwordFormControl = new FormControl('', [Validators.required]);
-
   matcher = new MyErrorStateMatcher();
-
   hide = true;
-
   loading: Boolean = false;
   showpopup: boolean = false;
-
   errorMessage: string | null = null;
   successMessage: string | null = null;
 
@@ -70,7 +66,6 @@ export class LoginComponent {
     this.router.navigate(['forget-password']);
   }
 
-
   onSubmit() {
     this.errorMessage = '';
 
@@ -87,10 +82,8 @@ export class LoginComponent {
           this.successMessage = response.message;
           this.authService.setToken(response.token);
           this.authService.setUserDetails(response.first_name, response.last_name);
-
           this.showpopup = true;
           this.loginEnterSound();
-          
           setTimeout(() => {
             this.showpopup = false;
             this.router.navigate(['streamada-overview']);
@@ -107,6 +100,5 @@ export class LoginComponent {
     }
   }
 
-
-
+  
 }

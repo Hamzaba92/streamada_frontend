@@ -1,68 +1,67 @@
 .popup-banner {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
-    z-index: 1000; 
-  }
-  
-  .popup-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+}
 
-  .checkmark {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 16px;
-    overflow: visible;
-  }
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+}
 
-  .checkmark-circle {
-    stroke: #7EC832;
-    stroke-width: 4;
-    stroke-miterlimit: 10;
-  }
+.checkmark {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 16px;
+  overflow: visible;
+}
 
-  .checkmark-check {
-    stroke: #7EC832;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-miterlimit: 10;
-  }
-  
-  .popup-content h1 {
-    color: #7EC832;
-    margin-bottom: 16px;
-  }
-  
-  .popup-content p {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 24px;
-  }
-  
-  .popup-content button {
-    background-color: #82CE34;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 88px;
-  }
-  
-  .popup-content button:hover {
-    background-color: #7EC832;
-    filter: brightness(1.2);
-  }
-  
+.checkmark-circle {
+  stroke: #7EC832;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+}
+
+.checkmark-check {
+  stroke: #7EC832;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+}
+
+.popup-content h1 {
+  color: #7EC832;
+  margin-bottom: 16px;
+}
+
+.popup-content p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+.popup-content button {
+  background-color: #82CE34;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 88px;
+}
+
+.popup-content button:hover {
+  background-color: #7EC832;
+  filter: brightness(1.2);
+}
