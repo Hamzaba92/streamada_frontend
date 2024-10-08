@@ -9,9 +9,6 @@
 ###1. Clone the Repository
 ``` git clone https://github.com/Hamzaba92/streamada_frontend.git ```
 
-###2. navigate to streamada
-``` cd streamada ```
-
 ###3. install dependencies
 ``` npm install ```
 
