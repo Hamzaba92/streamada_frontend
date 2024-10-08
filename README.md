@@ -9,8 +9,8 @@
 ###1. Clone the Repository
 ``` git clone https://github.com/Hamzaba92/streamada_frontend.git ```
 
-###3. install dependencies
+###2. install dependencies
 ``` npm install ```
 
-###4. start the app
+###3. start the app
 ``` ng serve --open```
