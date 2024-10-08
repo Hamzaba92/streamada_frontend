@@ -1,9 +1,11 @@
 ###Streamda was built with Angular 18
 
 ### You need the backend repository to run this application fully:
-```bash
-git clone https://github.com/Hamzaba92/streamada_backend.git
+    you can find the repo below:
+```git clone https://github.com/Hamzaba92/streamada_backend.git```
 
+
+```bash
 ###1. Clone the Repository
 ``` git clone https://github.com/Hamzaba92/streamada_frontend.git ```
 
