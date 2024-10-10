@@ -25,7 +25,7 @@ export class ResetPasswordComponent {
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
   passwordsMatch: boolean = true;
-  passwordPattern: RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  passwordPattern: RegExp = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&._#+\-=/^:;])[A-Za-z\d@$!%*?&._#+\-=/^:;]{8,}$/;
   loading: boolean = false;
   showpopup: boolean = false;
   uid: string = '';

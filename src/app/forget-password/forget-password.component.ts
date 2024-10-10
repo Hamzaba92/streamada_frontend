@@ -42,7 +42,9 @@ export class ForgetPasswordComponent {
       this.errorMessage = '';
       this.loading = true;
 
-      this.passwortResetService.sendPasswordResetEmail(this.email).subscribe(
+      const emailToLowerCase = this.email.toLowerCase();
+
+      this.passwortResetService.sendPasswordResetEmail(emailToLowerCase).subscribe(
         response => {
           this.loading = false;
           this.playEmailSentAudio();

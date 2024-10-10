@@ -59,7 +59,8 @@ export class RegisterComponent {
       password: ['', [
         Validators.required,
         Validators.minLength(8),
-        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+        Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&._#+\-=/^:;])[A-Za-z\d@$!%*?&._#+\-=/^:;]{8,}$/
+)
       ]],
       confirmPassword: ['', Validators.required]
     });
@@ -72,7 +73,7 @@ export class RegisterComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
-      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)
+      Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&._#+\-=/^:;])[A-Za-z\d@$!%*?&._#+\-=/^:;]{8,}$/)
     ]),
     confirmPassword: new FormControl('', [Validators.required]),
   });
@@ -121,7 +122,7 @@ export class RegisterComponent {
       const userData: RegisterData = {
         first_name: formData.firstName!,
         last_name: formData.lastName!,
-        email: formData.email!,
+        email: formData.email!.toLowerCase(),
         password: formData.password!,
         confirm_password: formData.confirmPassword!
       };

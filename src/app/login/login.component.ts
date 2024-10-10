@@ -71,7 +71,7 @@ export class LoginComponent {
 
     if (this.emailFormControl.valid && this.passwordFormControl.valid) {
       const credentials: LoginData = {
-        email: this.emailFormControl.value as string,
+        email: (this.emailFormControl.value as string).toLocaleLowerCase(),
         password: this.passwordFormControl.value as string,
       }
       this.loading = true;
