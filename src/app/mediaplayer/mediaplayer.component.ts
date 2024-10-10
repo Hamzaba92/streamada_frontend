@@ -13,6 +13,7 @@ import { VideoService } from '../services/video.service';
 export class MediaplayerComponent {
   currentVideoSrc: string;
   video: any;
+  selectedQuality: string = '';
 
   constructor(private router: Router, private videoService: VideoService) {
     this.video = this.videoService.getSelectedVideo();

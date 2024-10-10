@@ -24,12 +24,12 @@
             <div class="col">
                 <div ngbDropdown class="d-inline-block">
                     <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>
-                        Select Quality
+                    {{ selectedQuality || 'Select Quality' }}
                     </button>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem (click)="selectQuality('480p')">480p SD</button>
-                        <button ngbDropdownItem (click)="selectQuality('720p')">720p HD</button>
-                        <button ngbDropdownItem (click)="selectQuality('1080p')">1080p Full HD</button>
+                        <button ngbDropdownItem (click)="selectQuality('480p'); selectedQuality = '480p SD'">480p SD</button>
+                        <button ngbDropdownItem (click)="selectQuality('720p'); selectedQuality = '720p HD'">720p HD</button>
+                        <button ngbDropdownItem (click)="selectQuality('1080p'); selectedQuality = '1080p Full HD'">1080p Full HD</button>
                     </div>
                 </div>
             </div>
