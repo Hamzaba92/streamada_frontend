@@ -2,6 +2,10 @@
 @import './../../styles.scss';
 @import 'mediaquerys.scss';
 
+.no-max-width{
+  max-width: 100% !important;
+}
+
 .navbar {
   background-color: rgba(#000000, 0.88);
   margin: 0;
@@ -11,9 +15,10 @@
   align-items: center;
   flex-wrap: nowrap;
   z-index: 100;
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 60px;
-
+  padding-left: 36px;
   button {
     margin-right: 32px;
     color: white;

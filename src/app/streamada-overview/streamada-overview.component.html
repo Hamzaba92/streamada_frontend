@@ -1,5 +1,5 @@
 <nav class="navbar">
-  <div class="container d-flex justify-content-between align-items-center">
+  <div class="container no-max-width d-flex justify-content-between align-items-center">
     <a class="navbar-brand">
       <svg viewBox="0 0 1000 200" width="190px" height="50px">
         <path id="curved-path" fill="transparent" d="M 50,150 Q 550,50 1050,150" />
@@ -58,7 +58,7 @@
   <section *ngIf="selectedVideo" class="video-info">
     <h1>{{ selectedVideo.title }}</h1>
     <p>{{ selectedVideo.description }}</p>
-    <p><strong>Genre:</strong>{{ selectedVideo.genre }}</p>
+    <p><strong>Genre: </strong>{{ selectedVideo.genre }}</p>
     <button (click)="openMediaPlayer($event, selectedVideo)" class="btn btn-primary">Play</button>
   </section>
 

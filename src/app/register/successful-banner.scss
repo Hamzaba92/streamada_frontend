@@ -7,8 +7,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.6); /* Halbtransparenter Hintergrund */
-    z-index: 1000; /* Pop-up über den restlichen Inhalten anzeigen */
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1000; 
   }
   
   .popup-content {
