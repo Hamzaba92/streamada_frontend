@@ -68,18 +68,18 @@
     align-items: center;
     z-index: 4;
     height: auto;
-    max-width: 600px;
+    max-width: 780px;
     flex-direction: column;
     column-gap: 20px;
-    padding: 10px 10px 10px 10px;
 
     h1 {
       margin-bottom: 28px;
     }
 
     video {
-      width: 100%;
-      height: auto;
+
+      width: 780px!important;
+      height: 420px!important;
     }
   }
 
