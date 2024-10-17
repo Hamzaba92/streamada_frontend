@@ -26,6 +26,10 @@
 
 <main class="streamada-overview-overcontainer">
 
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
   <header class="video-playing-loop-atf">
     <video #backgroundVideo [src]="currentVideoSrc" type="video/mp4" autoplay loop playsinline muted class="background-video">
       Your browser does not support the video tag.
@@ -40,7 +44,7 @@
       <div class="video-container">
         <div class="video-item" *ngFor="let video of videosByGenre['New to Streamada']"
           (click)="playVideo($event, video)">
-          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
+          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail" (load)="onImageLoad()" (error)="onImageLoad()">
 
           <div class="hover-dialog" (click)="onHoverDialogClick($event)">
             <h4>{{ video.title }}</h4>
@@ -68,7 +72,7 @@
       <h2>{{ genre }}</h2>
       <div class="items-container">
         <div *ngFor="let video of videosByGenre[genre]" class="genre-item" (click)="playVideo($event, video)">
-          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail">
+          <img [src]="video.thumbnail_url" [alt]="video.title" class="thumbnail" (load)="onImageLoad()" (error)="onImageLoad()">
 
           <div class="hover-dialog" (click)="onHoverDialogClick($event)">
             <h4>{{ video.title }}</h4>

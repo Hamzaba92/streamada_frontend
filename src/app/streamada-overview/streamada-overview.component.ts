@@ -23,6 +23,9 @@ export class StreamadaOverviewComponent implements  OnDestroy, OnInit {
   videos: Video[] = [];
   videosByGenre: { [key: string]: Video[] } = {};
   private videoSubscription: Subscription | undefined;
+  imagesLoaded: number = 0;
+  isLoading: boolean = true;
+  totalImages: number = 0;
  
   constructor(
     private router: Router,
@@ -82,6 +85,7 @@ export class StreamadaOverviewComponent implements  OnDestroy, OnInit {
       (data: Video[]) => {
         this.videos = data;
         this.groupVideosByGenre();
+        this.totalImages = this.videos.length;
         if (this.videos.length > 0) {
           this.currentVideoSrc = this.videos[0].video_1080p_url;
           this.selectedVideo = this.videos[0];
@@ -135,5 +139,11 @@ export class StreamadaOverviewComponent implements  OnDestroy, OnInit {
     event.stopPropagation();
   }
 
+  onImageLoad(): void {
+    this.imagesLoaded++;
+    if (this.imagesLoaded >= this.totalImages) {
+      this.isLoading = false;
+    }
+  }
 
 }

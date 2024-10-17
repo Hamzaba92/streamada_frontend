@@ -1,6 +1,7 @@
 @import './../../colors.scss';
 @import './../../styles.scss';
 @import 'mediaquerys.scss';
+@import 'spinner.scss';
 
 .no-max-width{
   max-width: 100% !important;
@@ -278,7 +279,7 @@ header.video-playing-loop-atf {
 /* Video-Genre Section */
 .video-genre {
   display: flex;
-  flex-direction: column; /* Genres vertikal anordnen */
+  flex-direction: column; 
   justify-content: flex-start;
   align-items: flex-start;
   gap: 25px;
